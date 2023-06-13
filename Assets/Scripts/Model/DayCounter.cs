@@ -22,6 +22,7 @@ public class DayCounter : MonoBehaviour
         if(_time > _dayPassBoard)
         {
             _dayCount++;
+            DayPassed?.Invoke();
             _time = 0;
         }
         Debug.Log(_dayCount);
