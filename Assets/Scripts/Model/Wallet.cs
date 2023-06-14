@@ -1,8 +1,26 @@
-using UnityEngine;
-
-public class Wallet : MonoBehaviour
+public class Wallet
 {
+    private DifficultySetup _difficulty;
+    private int _easyValue = 10000;
+    private int _normalValue = 5000;
+    private int _hardValue = 0;
+
     public int Value { get; private set; }
+
+    private int GetStartMoney(DifficultySetup difficulty)
+    {
+        switch (difficulty.DifficultyLevel)
+        {
+            case Difficulty.Easy:
+                return _easyValue;
+            case Difficulty.Normal:
+                return _normalValue;
+            case Difficulty.Hard:
+                return _hardValue;
+            default:
+                return 0;
+        }
+    }
 
     private bool IsEnoughValue(int value)
     {
@@ -18,5 +36,10 @@ public class Wallet : MonoBehaviour
     {
         if (IsEnoughValue(value))
             Value -= value;
+    }
+
+    public Wallet()
+    {
+        Value = GetStartMoney(_difficulty);
     }
 }

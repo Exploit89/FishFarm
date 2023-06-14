@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public enum ProductType
@@ -13,4 +11,9 @@ public enum ProductType
 public class Product : MonoBehaviour
 {
     public ProductType ProductType { get; private set; }
+
+    public void SetProductType(ProductType productType)
+    {
+        ProductType = productType;
+    }
 }
