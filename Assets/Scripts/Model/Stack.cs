@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Stack : MonoBehaviour
@@ -22,22 +23,18 @@ public class Stack : MonoBehaviour
         Quantity -= value;
     }
 
-    //private void CreateStacks()
-    //{
-    //    ClearStacks();
-    //    Product product = new Product();
-    //    Stack stack = new Stack();
+    public List<Stack> CreateStacks()
+    {
+        List<Stack> stacks = new List<Stack>();
+        Product product = new Product();
+        Stack stack = new Stack();
 
-    //    foreach (ProductType productType in Enum.GetValues(typeof(ProductType)))
-    //    {
-    //        product.SetProductType(productType);
-    //        stack.Initialize(product, 0);
-    //        _products.Add(stack);
-    //    }
-    //}
-
-    //private void ClearStacks()
-    //{
-    //    _products.Clear();
-    //}
+        foreach (ProductType productType in Enum.GetValues(typeof(ProductType)))
+        {
+            product.SetProductType(productType);
+            stack.Initialize(product, 0);
+            stacks.Add(stack);
+        }
+        return stacks;
+    }
 }

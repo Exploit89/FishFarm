@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -16,15 +15,8 @@ public class Player : MonoBehaviour
     private void CreateStacks()
     {
         ClearStacks();
-        Product product = new Product();
         Stack stack = new Stack();
-
-        foreach (ProductType productType in Enum.GetValues(typeof(ProductType)))
-        {
-            product.SetProductType(productType);
-            stack.Initialize(product, 0);
-            _products.Add(stack);
-        }
+        _products = stack.CreateStacks();
     }
 
     private void ClearStacks()
