@@ -7,7 +7,7 @@ public class Stack : MonoBehaviour
     public Product Product { get; private set; }
     public int Quantity { get; private set; }
 
-    public void Initialize(Product product, int quantity)
+    private void Initialize(Product product, int quantity)
     {
         Product = product;
         Quantity = quantity;
@@ -37,7 +37,7 @@ public class Stack : MonoBehaviour
             product.SetProductType(productType);
             stack.Initialize(product, 0);
             stacks.Add(stack);
-            Debug.Log("Stack created = " + stack.Product + stack.Quantity);
+            Debug.Log("Stacks created = " + stack.Product + stack.Quantity);
         }
         return stacks;
     }

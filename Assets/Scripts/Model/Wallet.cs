@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class Wallet
 {
-    private DifficultySetup _difficulty;
     private int _easyValue = 10000;
     private int _normalValue = 5000;
     private int _hardValue = 0;
@@ -44,9 +43,9 @@ public class Wallet
         }
     }
 
-    public Wallet()
+    public Wallet(DifficultySetup difficulty)
     {
-        Value = GetStartMoney(_difficulty);
+        Value = GetStartMoney(difficulty);
         Debug.Log("StartMoney get = " + Value);
     }
 }

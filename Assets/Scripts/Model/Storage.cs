@@ -1,71 +1,32 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(StackMover))]
+[RequireComponent(typeof(Capacity))]
+
 public class Storage : MonoBehaviour
 {
-    private int _capacity = 20;
-    private int _freeCapacity;
-    private string _name;
     private List<Stack> _products;
-    private Factory _factory; //
-
-    private void Start()
-    {
-        CreateStacks();
-    }
-
-    private void CreateStacks()
-    {
-        ClearStacks();
-        Stack stack = new Stack();
-        _products = stack.CreateStacks();
-    }
-
-    private void ClearStacks()
-    {
-        _products.Clear();
-    }
+    private Capacity _capacity;
+    private StackMover _stackMover;
+    private string _name;
+    private int _startCapacity = 50;
 
     private void OnEnable()
     {
-        GameObject equipment = gameObject.GetComponentInParent<GameObject>(); //
-        _factory = equipment.GetComponentInChildren<Factory>(); //
-        _freeCapacity = _capacity;
+        _stackMover = GetComponent<StackMover>();
+        _capacity = GetComponent<Capacity>();
+        _capacity.SetCapacity(_startCapacity);
+        _stackMover.CreateStacks();
     }
 
-    private void CapturePlace(int value)
+    private void TakeStack(Stack stack)
     {
-        _freeCapacity -= value;
+        _stackMover.AddProductCount(stack);
     }
 
-    private void FreePlace(int value)
+    private void DropStack()
     {
-        _freeCapacity += value;
-    }
 
-    private int GetPossibleQuantity(int spaceToCapture)
-    {
-        int possibleSpace = 0;
-        int neededSpace = _freeCapacity - spaceToCapture;
-
-        if(neededSpace < 0)
-        {
-            possibleSpace = spaceToCapture + neededSpace;
-            return possibleSpace;
-        }
-        return spaceToCapture;
-    }
-
-    public void AddProductCount(Stack stack)
-    {
-        foreach (var item in _products)
-        {
-            if(item.Product.ProductType == stack.Product.ProductType)
-            {
-                Debug.Log("Storage stack qty before add = " + item.Quantity);
-                item.IncreaseQuantity(GetPossibleQuantity(stack.Quantity));
-                Debug.Log("Storage stack qty after add = " + item.Quantity);
-            }
-        }
     }
 }

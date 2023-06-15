@@ -14,5 +14,6 @@ public class DifficultySetup : MonoBehaviour
     private void OnEnable()
     {
         // TODO сделать выбор сложности
+        DifficultyLevel = Difficulty.Easy;
     }
 }

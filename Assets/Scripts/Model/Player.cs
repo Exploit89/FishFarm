@@ -1,53 +1,35 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(StackMover))]
+[RequireComponent(typeof(Capacity))]
+
 public class Player : MonoBehaviour
 {
-    private int _freeCapacity;
     private Wallet _wallet;
-    private List<Stack> _products = new List<Stack>();
+    private Capacity _capacity;
+    private StackMover _stackMover;
+    private int _startCapacity = 5;
+    private DifficultySetup _difficulty;
 
     private void Start()
     {
-        _wallet = new Wallet();
-        CreateStacks();
+        _difficulty = gameObject.AddComponent<DifficultySetup>();
+        _wallet = new Wallet(_difficulty);
+        _stackMover = GetComponent<StackMover>();
+        _capacity = GetComponent<Capacity>();
+        _capacity.SetCapacity(_startCapacity);
+        _stackMover.CreateStacks();
     }
 
-    private void CreateStacks()
+    private void TakeStack(Stack stack)
     {
-        ClearStacks();
-        Stack stack = new Stack();
-        _products = stack.CreateStacks();
+        _stackMover.AddProductCount(stack);
     }
 
-    private void ClearStacks()
+    private void DropStack()
     {
-        _products.Clear();
-    }
-
-    private int GetPossibleQuantity(int spaceToCapture)
-    {
-        int possibleSpace = 0;
-        int neededSpace = _freeCapacity - spaceToCapture;
-
-        if (neededSpace < 0)
-        {
-            possibleSpace = spaceToCapture + neededSpace;
-            return possibleSpace;
-        }
-        return spaceToCapture;
-    }
-
-    public void AddProductCount(Stack stack)
-    {
-        foreach (var item in _products)
-        {
-            if (item.Product.ProductType == stack.Product.ProductType)
-            {
-                Debug.Log("Storage stack qty before add = " + item.Quantity);
-                item.IncreaseQuantity(GetPossibleQuantity(stack.Quantity));
-                Debug.Log("Storage stack qty after add = " + item.Quantity);
-            }
-        }
+        
     }
 }
