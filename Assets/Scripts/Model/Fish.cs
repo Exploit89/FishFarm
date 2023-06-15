@@ -1,3 +1,4 @@
+using Newtonsoft.Json.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -45,14 +46,16 @@ public class Fish : MonoBehaviour
     public void AddWeight(float multiplier)
     {
         _weight += multiplier * _growthWeightValue;
+        Debug.Log("Weight added, total = " + _weight);
 
-        if(_weight > _maxWeight )
+        if (_weight > _maxWeight )
             _weight = _maxWeight;
     }
 
     public void RemoveWeight(float multiplier)
     {
         _weight /= multiplier;
+        Debug.Log("Weight removed, total = " + _weight);
 
         if (IsDeadWeight())
             FishDied?.Invoke();
@@ -61,6 +64,7 @@ public class Fish : MonoBehaviour
     public void AddHealth()
     {
         _health++;
+        Debug.Log("Health added, total = " + _health);
 
         if (_health > _maxHealth)
             _health = _maxHealth;
@@ -74,14 +78,19 @@ public class Fish : MonoBehaviour
         {
             _health = 0;
             FishDied?.Invoke();
+            Debug.Log("Fish died - " + _name);
         }
     }
 
     public void PassOneDay()
     {
         _lifeDays++;
+        Debug.Log("day passed, total = " + _lifeDays);
 
-        if(_lifeDays > _maxLifeDays)
+        if (_lifeDays > _maxLifeDays)
+        {
             FishDied?.Invoke();
+            Debug.Log("Fish died - " + _name);
+        }
     }
 }

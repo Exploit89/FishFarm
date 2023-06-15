@@ -1,3 +1,5 @@
+using UnityEngine;
+
 public class Wallet
 {
     private DifficultySetup _difficulty;
@@ -30,16 +32,21 @@ public class Wallet
     public void AddValue(int value)
     {
         Value += value;
+        Debug.Log("value added, total = " + Value);
     }
 
     public void RemoveValue(int value)
     {
         if (IsEnoughValue(value))
+        {
             Value -= value;
+            Debug.Log("value removed, total = " + Value);
+        }
     }
 
     public Wallet()
     {
         Value = GetStartMoney(_difficulty);
+        Debug.Log("StartMoney get = " + Value);
     }
 }

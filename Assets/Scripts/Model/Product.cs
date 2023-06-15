@@ -15,5 +15,6 @@ public class Product : MonoBehaviour
     public void SetProductType(ProductType productType)
     {
         ProductType = productType;
+        Debug.Log("ProductType set = " + ProductType);
     }
 }
