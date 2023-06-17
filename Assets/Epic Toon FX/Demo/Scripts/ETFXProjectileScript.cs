@@ -3,7 +3,7 @@ using System.Collections;
 
     public class ETFXProjectileScript : MonoBehaviour
     {
-        public GameObject impactParticle; // Effect spawned when projectile hits a collider
+        public GameObject impactParticle; // Effect spawned when projectile hits a _collider
         public GameObject projectileParticle; // Effect attached to the gameobject as child
         public GameObject muzzleParticle; // Effect instantly spawned when gameobject is spawned
         [Header("Adjust if not using Sphere Collider")]
@@ -31,7 +31,7 @@ using System.Collections;
 			
             RaycastHit hit;
 			
-            float radius; // Sets the radius of the collision detection
+            float radius; // Sets the _radius of the collision detection
             if (transform.GetComponent<SphereCollider>())
                 radius = transform.GetComponent<SphereCollider>().radius;
             else

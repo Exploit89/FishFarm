@@ -22,14 +22,14 @@ public class ETFXTarget : MonoBehaviour
     void SpawnTarget()
     {
         targetRenderer.enabled = true; //Shows the target
-		targetCollider.enabled = true; //Enables the collider
+		targetCollider.enabled = true; //Enables the _collider
 		GameObject respawnEffect = Instantiate(respawnParticle, transform.position, transform.rotation) as GameObject; //Spawns attached respawn effect
 		Destroy(respawnEffect, 3.5f); //Removes attached respawn effect after x seconds
     }
 
     void OnTriggerEnter(Collider col)
     {
-        if (col.tag == "Missile") // If collider is tagged as missile
+        if (col.tag == "Missile") // If _collider is tagged as missile
         {
             if (hitParticle)
             {
@@ -37,7 +37,7 @@ public class ETFXTarget : MonoBehaviour
 				GameObject destructibleEffect = Instantiate(hitParticle, transform.position, transform.rotation) as GameObject; // Spawns attached hit effect
 				Destroy(destructibleEffect, 2f); // Removes hit effect after x seconds
 				targetRenderer.enabled = false; // Hides the target
-				targetCollider.enabled = false; // Disables target collider
+				targetCollider.enabled = false; // Disables target _collider
 				StartCoroutine(Respawn()); // Sets timer for respawning the target
             }
         }

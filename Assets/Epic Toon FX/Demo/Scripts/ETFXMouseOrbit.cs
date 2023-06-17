@@ -25,7 +25,7 @@ public class ETFXMouseOrbit : MonoBehaviour
         Vector3 angles = transform.eulerAngles;
         rotationYAxis = angles.y;
         rotationXAxis = angles.x;
-        // Make the rigid body not change rotation
+        // Make the _rigidbody body not change rotation
         if (GetComponent<Rigidbody>())
         {
             GetComponent<Rigidbody>().freezeRotation = true;

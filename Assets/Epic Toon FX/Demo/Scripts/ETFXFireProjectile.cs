@@ -53,7 +53,7 @@ namespace EpicToonFX
                     {
                         GameObject projectile = Instantiate(projectiles[currentProjectile], spawnPosition.position, Quaternion.identity) as GameObject; //Spawns the selected projectile
                         projectile.transform.LookAt(hit.point); //Sets the projectiles rotation to look at the point clicked
-                        projectile.GetComponent<Rigidbody>().AddForce(projectile.transform.forward * speed); //Set the speed of the projectile by applying force to the rigidbody
+                        projectile.GetComponent<Rigidbody>().AddForce(projectile.transform.forward * speed); //Set the speed of the projectile by applying force to the _rigidbody
                     }
                 }
             }
