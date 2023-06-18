@@ -37,6 +37,11 @@ public class StackMover : MonoBehaviour
         return spaceToCapture;
     }
 
+    private void Update()
+    {
+        
+    }
+
     public void CreateStacks()
     {
         ClearStacks();
@@ -54,6 +59,38 @@ public class StackMover : MonoBehaviour
                 Debug.Log("Storage stack qty before add = " + item.Quantity);
                 item.IncreaseQuantity(GetPossibleQuantity(stack.Quantity));
                 Debug.Log("Storage stack qty after add = " + item.Quantity);
+            }
+        }
+    }
+
+    public void RemoveProductCount(Stack stack)
+    {
+        foreach (var item in _products)
+        {
+            if(item.Product.ProductType == stack.Product.ProductType)
+            {
+                Debug.Log("Storage stack qty before remove = " + item.Quantity);
+                Debug.Log("Free capacity before remove = " + item.Quantity);
+                item.DecreaseQuantity(stack.Quantity);
+                _freeCapacity += stack.Quantity;
+                Debug.Log("Storage stack qty after remove = " + item.Quantity);
+                Debug.Log("Free capacity after remove = " + item.Quantity);
+            }
+        }
+    }
+
+    public void RemoveProductCount(Stack stack, int value)
+    {
+        foreach (var item in _products)
+        {
+            if (item.Product.ProductType == stack.Product.ProductType)
+            {
+                Debug.Log("Storage stack qty before remove = " + value);
+                Debug.Log("Free capacity before remove = " + value);
+                item.DecreaseQuantity(value);
+                _freeCapacity += value;
+                Debug.Log("Storage stack qty after remove = " + value);
+                Debug.Log("Free capacity after remove = " + value);
             }
         }
     }

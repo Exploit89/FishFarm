@@ -28,8 +28,8 @@ public class Player : MonoBehaviour
         _stackMover.AddProductCount(stack);
     }
 
-    private void DropStack()
+    private void DropStack(Stack stack)
     {
-        
+        _stackMover.RemoveProductCount(stack);
     }
 }
