@@ -1,15 +1,26 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(Capacity))]
+[RequireComponent(typeof(StackCreator))]
 
 public class StackMover : MonoBehaviour
 {
+    private StackCreator _stackCreator;
     private List<Stack> _products;
-    private int _freeCapacity = 0;
+    private int _freeCapacity = 100;
+
+    public event UnityAction<int> OnStackChanged;
+
+    private void Awake()
+    {
+        _stackCreator = GetComponent<StackCreator>();
+    }
 
     private void Start()
     {
+        _products = new List<Stack>();
         _freeCapacity = GetComponent<Capacity>().FreeCapacity;
     }
 
@@ -37,16 +48,10 @@ public class StackMover : MonoBehaviour
         return spaceToCapture;
     }
 
-    private void Update()
-    {
-        
-    }
-
     public void CreateStacks()
     {
         ClearStacks();
-        Stack stack = new Stack();
-        _products = stack.CreateStacks();
+        _products = _stackCreator.CreateStacks();
         Debug.Log("Stacks created - " + _products + _products.Count);
     }
 
@@ -57,8 +62,10 @@ public class StackMover : MonoBehaviour
             if (item.Product.ProductType == stack.Product.ProductType)
             {
                 Debug.Log("Storage stack qty before add = " + item.Quantity);
-                item.IncreaseQuantity(GetPossibleQuantity(stack.Quantity));
+                int possibleQuantity = GetPossibleQuantity(stack.Quantity);
+                item.IncreaseQuantity(possibleQuantity);
                 Debug.Log("Storage stack qty after add = " + item.Quantity);
+                OnStackChanged?.Invoke(possibleQuantity);
             }
         }
     }
@@ -67,7 +74,7 @@ public class StackMover : MonoBehaviour
     {
         foreach (var item in _products)
         {
-            if(item.Product.ProductType == stack.Product.ProductType)
+            if (item.Product.ProductType == stack.Product.ProductType)
             {
                 Debug.Log("Storage stack qty before remove = " + item.Quantity);
                 Debug.Log("Free capacity before remove = " + item.Quantity);
@@ -75,6 +82,7 @@ public class StackMover : MonoBehaviour
                 _freeCapacity += stack.Quantity;
                 Debug.Log("Storage stack qty after remove = " + item.Quantity);
                 Debug.Log("Free capacity after remove = " + item.Quantity);
+                OnStackChanged?.Invoke(stack.Quantity);
             }
         }
     }
@@ -91,7 +99,15 @@ public class StackMover : MonoBehaviour
                 _freeCapacity += value;
                 Debug.Log("Storage stack qty after remove = " + value);
                 Debug.Log("Free capacity after remove = " + value);
+                OnStackChanged?.Invoke(value);
             }
         }
+    }
+
+    public List<Stack> GetStacks()
+    {
+        List<Stack> list = new List<Stack>();
+        list = _products;
+        return list;
     }
 }

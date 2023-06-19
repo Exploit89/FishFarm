@@ -24,7 +24,7 @@ public class DayCounter : MonoBehaviour
             _dayCount++;
             DayPassed?.Invoke();
             _time = 0;
-            Debug.Log("day added = " + _dayCount);
+            //Debug.Log("day added = " + _dayCount);
         }
     }
 }

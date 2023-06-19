@@ -1,18 +1,9 @@
-using System;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class Stack : MonoBehaviour
+public class Stack
 {
     public Product Product { get; private set; }
     public int Quantity { get; private set; }
-
-    private void Initialize(Product product, int quantity)
-    {
-        Product = product;
-        Quantity = quantity;
-        Debug.Log("Stack initialized = " + Product + Quantity);
-    }
 
     public void IncreaseQuantity(int value)
     {
@@ -26,19 +17,9 @@ public class Stack : MonoBehaviour
         Debug.Log("Quantity decreased, now it = " + Quantity);
     }
 
-    public List<Stack> CreateStacks()
+    public Stack(Product product, int quantity)
     {
-        List<Stack> stacks = new List<Stack>();
-        Product product = new Product();
-        Stack stack = new Stack();
-
-        foreach (ProductType productType in Enum.GetValues(typeof(ProductType)))
-        {
-            product.SetProductType(productType);
-            stack.Initialize(product, 0);
-            stacks.Add(stack);
-            Debug.Log("Stacks created = " + stack.Product + stack.Quantity);
-        }
-        return stacks;
+        Product = product;
+        Quantity = quantity;
     }
 }

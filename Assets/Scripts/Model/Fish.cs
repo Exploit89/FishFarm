@@ -28,7 +28,7 @@ public class Fish : MonoBehaviour
 
     private void OnEnable()
     {
-        _dayCounter = new DayCounter();
+        _dayCounter = gameObject.AddComponent<DayCounter>();
         _dayCounter.DayPassed += PassOneDay;
     }
 
@@ -84,12 +84,12 @@ public class Fish : MonoBehaviour
     public void PassOneDay()
     {
         _lifeDays++;
-        Debug.Log("day passed, total = " + _lifeDays);
+        //Debug.Log("day passed, total = " + _lifeDays);
 
         if (_lifeDays > _maxLifeDays)
         {
             FishDied?.Invoke();
-            Debug.Log("Fish died - " + _name);
+            //Debug.Log("Fish died - " + _name);
         }
     }
 }
