@@ -24,47 +24,50 @@ public class StackExchanger : MonoBehaviour
 
     private void OnTriggerEnter(Collider collider)
     {
-        if (collider.TryGetComponent(out StackMover stackMover))
+        if(collider.TryGetComponent(out StackMover stackMover))
+            stackMover.OnStackChanged += SetChangedValue;
+        
+        if (collider.TryGetComponent(out ITaker iTaker))
         {
-            Debug.Log(gameObject.name + " entered in " + stackMover.gameObject.name);
-            TryTake(stackMover);
+            StackMover otherStackMover = collider.GetComponent<StackMover>();
+            Debug.Log(otherStackMover.GetStacks().Count);
+            TryGive(otherStackMover);
+        }
+
+        if(collider.TryGetComponent(out IGiver iGiver))
+        {
+            StackMover otherStackMover = collider.GetComponent<StackMover>();
+            Debug.Log(otherStackMover.GetStacks().Count);
+            TryTake(otherStackMover);
         }
     }
 
     private void OnTriggerExit(Collider collider)
     {
         if (collider.TryGetComponent(out StackMover stackMover))
-        {
-            foreach (var item in stackMover.GetStacks())
-            {
-                Debug.Log(item.Product.name + item.Quantity);
-            }
-        }
+            stackMover.OnStackChanged -= SetChangedValue;
     }
 
     private void TryTake(StackMover stackMover)
     {
-        if(IsValidExchange(stackMover))
+        foreach (var item in stackMover.GetStacks())
         {
-            Debug.Log("WTF?");
-
-            foreach (var item in stackMover.GetStacks())
+            if (stackMover.GetComponent<IGiver>().GetProductTypes().Contains(item.Product.ProductType))
             {
-                Debug.Log(item.Product.ProductType);
-                Debug.Log(_stackMover.GetComponent<ITaker>().GetProductTypes()[0]);
-                Debug.Log(_stackMover.GetComponent<ITaker>().GetProductTypes()[1]);
-                Debug.Log(_stackMover.GetComponent<IGiver>().GetProductTypes()[0]);
-                Debug.Log(_stackMover.GetComponent<IGiver>().GetProductTypes()[1]);
-                if (_stackMover.GetComponent<ITaker>().GetProductTypes().Contains(item.Product.ProductType))
-                {
-                    Debug.Log("before add count" + item.Quantity);
-                    _stackMover.AddProductCount(item);
-                    Debug.Log("after add count");
-                    Debug.Log("before remove count" + _changedValue);
-                    stackMover.RemoveProductCount(item, _changedValue);
-                    Debug.Log("after remove count");
-                    Debug.Log(item.Quantity.ToString());
-                }
+                _stackMover.AddProductCount(item);
+                stackMover.RemoveProductCount(item, _changedValue);
+            }
+        }
+    }
+
+    private void TryGive(StackMover stackMover)
+    {
+        foreach (var item in _stackMover.GetStacks())
+        {
+            if (stackMover.GetComponent<ITaker>().GetProductTypes().Contains(item.Product.ProductType))
+            {
+                stackMover.AddProductCount(item);
+                _stackMover.RemoveProductCount(item, _changedValue);
             }
         }
     }
@@ -72,15 +75,5 @@ public class StackExchanger : MonoBehaviour
     private void SetChangedValue(int value)
     {
         _changedValue = value;
-    }
-
-    private bool IsValidExchange(StackMover stackMover)
-    {
-        if (stackMover.TryGetComponent(out IGiver iGiver) && _stackMover.TryGetComponent(out ITaker iTaker))
-        {
-            Debug.Log("IsValidExchange");
-            return true;
-        }
-        return false;
     }
 }

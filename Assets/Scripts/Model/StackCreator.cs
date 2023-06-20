@@ -4,16 +4,9 @@ using UnityEngine;
 
 public class StackCreator : MonoBehaviour
 {
-    [SerializeField] private Product _productPrefab;
+    [SerializeField] private Stack _stackPrefab;
 
     private int _startQuantity = 10;
-
-    private Stack Initialize(Product product, int quantity)
-    {
-        Stack stack = new Stack(product, quantity);
-        Debug.Log("Stack initialized = " + product + quantity);
-        return stack;
-    }
 
     public List<Stack> CreateStacks()
     {
@@ -21,12 +14,11 @@ public class StackCreator : MonoBehaviour
 
         foreach (ProductType productType in Enum.GetValues(typeof(ProductType)))
         {
-            Product product = Instantiate(_productPrefab, transform);
-            product.SetProductType(productType);
-            Debug.Log("product = " + product);
-            Stack stack = Initialize(product, _startQuantity);
+            Stack stack = Instantiate(_stackPrefab, transform);
+            stack.Initialize(new Product(), _startQuantity);
+            stack.Product.SetProductType(productType);
+            stack.name = stack.Product.Name;
             stacks.Add(stack);
-            Debug.Log("Stacks created = " + stack.Product + stack.Quantity);
         }
         return stacks;
     }

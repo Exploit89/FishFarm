@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(StackMover))]
+
 public class ITaker : MonoBehaviour
 {
     [SerializeField] private List<ProductType> _productTypes;

@@ -8,7 +8,7 @@ public class Player : MonoBehaviour
     private Wallet _wallet;
     private Capacity _capacity;
     private StackMover _stackMover;
-    private int _startCapacity = 5;
+    private int _startCapacity = 100;
     private DifficultySetup _difficulty;
 
     private void Start()

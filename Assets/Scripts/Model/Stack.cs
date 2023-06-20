@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Stack
+public class Stack : MonoBehaviour
 {
     public Product Product { get; private set; }
     public int Quantity { get; private set; }
@@ -17,7 +17,7 @@ public class Stack
         Debug.Log("Quantity decreased, now it = " + Quantity);
     }
 
-    public Stack(Product product, int quantity)
+    public void Initialize(Product product, int quantity)
     {
         Product = product;
         Quantity = quantity;

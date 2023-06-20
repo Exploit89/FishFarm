@@ -46,6 +46,6 @@ public class Wallet
     public Wallet(DifficultySetup difficulty)
     {
         Value = GetStartMoney(difficulty);
-        Debug.Log("StartMoney get = " + Value);
+        //Debug.Log("StartMoney get = " + Value);
     }
 }

@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(StackMover))]
+
 public class IGiver : MonoBehaviour
 {
     [SerializeField] private List<ProductType> _productTypes;
