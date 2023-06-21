@@ -1,12 +1,17 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Wallet
 {
     private int _easyValue = 10000;
     private int _normalValue = 5000;
     private int _hardValue = 0;
+    private int _maxValue = 0;
 
     public int Value { get; private set; }
+    public int FixedPrice { get; private set; }
+
+    public event UnityAction<int> OnValueChanged;
 
     private int GetStartMoney(DifficultySetup difficulty)
     {
@@ -28,10 +33,27 @@ public class Wallet
         return Value - value >= 0;
     }
 
+    private int GetPossibleValue(int value)
+    {
+        if(value >= _maxValue - Value)
+            return _maxValue - Value;
+        return value;
+    }
+
     public void AddValue(int value)
     {
-        Value += value;
-        Debug.Log("value added, total = " + Value);
+        int possibleValue = GetPossibleValue(value);
+        Value += possibleValue;
+        OnValueChanged?.Invoke(possibleValue);
+        Debug.Log("value added, total = " + possibleValue);
+    }
+
+    public bool CanBuy(int value)
+    {
+        if(IsEnoughValue(value))
+            return true;
+        return false;
+
     }
 
     public void RemoveValue(int value)
@@ -39,13 +61,29 @@ public class Wallet
         if (IsEnoughValue(value))
         {
             Value -= value;
+            OnValueChanged?.Invoke(value);
             Debug.Log("value removed, total = " + Value);
         }
     }
 
-    public Wallet(DifficultySetup difficulty)
+    public void RemoveFixedValue(int value)
     {
+        Value -= value;
+        OnValueChanged?.Invoke(value);
+        Debug.Log("value removed, total = " + Value);
+    }
+
+    public Wallet(DifficultySetup difficulty, int maxValue = 0)
+    {
+        _maxValue = maxValue;
         Value = GetStartMoney(difficulty);
-        //Debug.Log("StartMoney get = " + Value);
+        OnValueChanged?.Invoke(Value);
+    }
+
+    public Wallet(int maxValue = 0, int value = 0)
+    {
+        _maxValue = maxValue;
+        FixedPrice = maxValue;
+        Value = value;
     }
 }
