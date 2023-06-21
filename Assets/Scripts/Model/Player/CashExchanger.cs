@@ -1,5 +1,7 @@
 using UnityEngine;
 
+[RequireComponent(typeof(Player))]
+
 public class CashExchanger : MonoBehaviour
 {
     private Wallet _wallet;
