@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(Player))]
 
@@ -7,19 +8,20 @@ public class CashExchanger : MonoBehaviour
     private Wallet _wallet;
     private int _changedValue = 0;
 
-    private void Awake()
-    {
-        _wallet = GetComponent<Player>().GetWallet();
-    }
+    public event UnityAction<Item> ItemBought;
 
     private void OnEnable()
     {
-        _wallet.OnValueChanged += SetChangedValue;
+        GetComponent<Player>().WalletCreated += SubscribeOnWallet;
+        if (_wallet != null)
+            _wallet.OnValueChanged += SetChangedValue;
     }
 
     private void OnDisable()
     {
-        _wallet.OnValueChanged -= SetChangedValue;
+        GetComponent<Player>().WalletCreated -= SubscribeOnWallet;
+        if (_wallet != null)
+            _wallet.OnValueChanged -= SetChangedValue;
     }
 
     private void OnTriggerEnter(Collider collider)
@@ -46,6 +48,12 @@ public class CashExchanger : MonoBehaviour
         }
     }
 
+    private void SubscribeOnWallet(Wallet wallet)
+    {
+        _wallet = wallet;
+        _wallet.OnValueChanged += SetChangedValue;
+    }
+
     private void TryTake(Wallet wallet)
     {
         _wallet.AddValue(wallet.Value);
@@ -67,5 +75,14 @@ public class CashExchanger : MonoBehaviour
     private void SetChangedValue(int value)
     {
         _changedValue = value;
+    }
+
+    public void TryShopBuy(Item item)
+    {
+        if (_wallet.CanBuy(item.Price))
+        {
+            _wallet.RemoveFixedValue(item.Price);
+            ItemBought?.Invoke(item);
+        }
     }
 }

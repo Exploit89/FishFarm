@@ -13,7 +13,19 @@ public class Wallet
 
     public event UnityAction<int> OnValueChanged;
 
-    private int GetStartMoney(DifficultySetup difficulty)
+    private bool IsEnoughValue(int value)
+    {
+        return Value - value >= 0;
+    }
+
+    private int GetPossibleValue(int value)
+    {
+        if(value >= _maxValue - Value)
+            return _maxValue - Value;
+        return value;
+    }
+
+    public int GetStartMoney(DifficultySetup difficulty)
     {
         switch (difficulty.DifficultyLevel)
         {
@@ -26,18 +38,6 @@ public class Wallet
             default:
                 return 0;
         }
-    }
-
-    private bool IsEnoughValue(int value)
-    {
-        return Value - value >= 0;
-    }
-
-    private int GetPossibleValue(int value)
-    {
-        if(value >= _maxValue - Value)
-            return _maxValue - Value;
-        return value;
     }
 
     public void AddValue(int value)
@@ -73,12 +73,17 @@ public class Wallet
         Debug.Log("value removed, total = " + Value);
     }
 
-    public Wallet(DifficultySetup difficulty, int maxValue = 0)
+    public void SetFixedPrice(int value)
     {
-        _maxValue = maxValue;
-        Value = GetStartMoney(difficulty);
-        OnValueChanged?.Invoke(Value);
+        FixedPrice = value;
     }
+
+    //public Wallet(DifficultySetup difficulty, int maxValue = 0)
+    //{
+    //    _maxValue = maxValue;
+    //    Value = GetStartMoney(difficulty);
+    //    OnValueChanged?.Invoke(Value);
+    //}
 
     public Wallet(int maxValue = 0, int value = 0)
     {

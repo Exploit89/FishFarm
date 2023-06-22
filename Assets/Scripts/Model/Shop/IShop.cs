@@ -15,4 +15,9 @@ public class IShop : MonoBehaviour
         wallet = _wallet;
         return wallet;
     }
+
+    public void SetFixedPrice(int value)
+    {
+        _wallet.SetFixedPrice(value);
+    }
 }
