@@ -1,8 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(IShop))]
-
 public class Shop : MonoBehaviour
 {
     [SerializeField] private List<Item> _items;
@@ -14,9 +12,6 @@ public class Shop : MonoBehaviour
 
     private void Start()
     {
-        _iSHop = GetComponent<IShop>();
-        _iSHop.SetFixedPrice(500); //
-
         for (int i = 0; i < _items.Count; i++)
         {
             AddItem(_items[i]);
