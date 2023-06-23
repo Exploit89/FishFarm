@@ -2,6 +2,13 @@ using UnityEngine;
 
 public class Menu : MonoBehaviour
 {
+    [SerializeField] private GameObject _menuPanel;
+
+    private void Start()
+    {
+        OpenPanel(_menuPanel);
+    }
+
     public void OpenPanel(GameObject panel)
     {
         panel.gameObject.SetActive(true);

@@ -14,11 +14,6 @@ public class Bag : MonoBehaviour
         _cashExchanger = GetComponent<CashExchanger>();
     }
 
-    private void Start()
-    {
-
-    }
-
     private void OnEnable()
     {
         _cashExchanger.ItemBought += AddItem;
