@@ -26,8 +26,8 @@ public class CashExchanger : MonoBehaviour
 
     private void OnTriggerEnter(Collider collider)
     {
-        if (collider.TryGetComponent(out Wallet wallet))
-            wallet.OnValueChanged += SetChangedValue;
+        //if (collider.TryGetComponent(out Wallet wallet))
+        //    wallet.OnValueChanged += SetChangedValue;
 
         if (collider.TryGetComponent(out ITaker iTaker))
         {
