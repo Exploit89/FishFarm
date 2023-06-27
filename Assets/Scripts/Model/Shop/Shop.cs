@@ -8,8 +8,6 @@ public class Shop : MonoBehaviour
     [SerializeField] private ItemView _template;
     [SerializeField] private GameObject _itemContainer;
 
-    private IShop _iSHop;
-
     private void Start()
     {
         for (int i = 0; i < _items.Count; i++)

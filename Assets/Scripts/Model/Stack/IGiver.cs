@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(StackMover))]
+[RequireComponent(typeof(Wallet))]
 
 public class IGiver : MonoBehaviour
 {
@@ -12,7 +13,8 @@ public class IGiver : MonoBehaviour
 
     private void Awake()
     {
-        _wallet = new Wallet(_maxCash);
+        _wallet = GetComponent<Wallet>();
+        _wallet.SetMaxCash(_maxCash);
     }
 
     public void AddProductType(ProductType productType)
@@ -25,12 +27,5 @@ public class IGiver : MonoBehaviour
         List<ProductType> products = new List<ProductType>();
         products = _productTypes;
         return products;
-    }
-
-    public Wallet GetWallet()
-    {
-        Wallet wallet = new Wallet();
-        wallet = _wallet;
-        return wallet;
     }
 }

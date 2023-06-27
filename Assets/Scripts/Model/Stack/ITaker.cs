@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(StackMover))]
+[RequireComponent(typeof(Wallet))]
 
 public class ITaker : MonoBehaviour
 {
@@ -11,7 +12,7 @@ public class ITaker : MonoBehaviour
 
     private void Awake()
     {
-        _wallet = new Wallet();
+        _wallet = GetComponent<Wallet>();
     }
 
     public void AddProductType(ProductType productType)
@@ -24,12 +25,5 @@ public class ITaker : MonoBehaviour
         List<ProductType> products = new List<ProductType>();
         products = _productTypes;
         return products;
-    }
-
-    public Wallet GetWallet()
-    {
-        Wallet wallet = new Wallet();
-        wallet = _wallet;
-        return wallet;
     }
 }

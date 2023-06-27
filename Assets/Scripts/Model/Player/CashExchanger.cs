@@ -26,25 +26,21 @@ public class CashExchanger : MonoBehaviour
 
     private void OnTriggerEnter(Collider collider)
     {
-        //if (collider.TryGetComponent(out Wallet wallet))
-        //    wallet.OnValueChanged += SetChangedValue;
-
         if (collider.TryGetComponent(out ITaker iTaker))
         {
-            Wallet otherWallet = collider.GetComponent<ITaker>().GetWallet();
+            Wallet otherWallet = collider.GetComponent<Wallet>();
             TryGive(otherWallet);
         }
 
         if (collider.TryGetComponent(out IGiver iGiver))
         {
-            Wallet otherWallet = collider.GetComponent<IGiver>().GetWallet();
+            Wallet otherWallet = collider.GetComponent<Wallet>();
             TryTake(otherWallet);
         }
 
-        if(collider.TryGetComponent(out IShop iShop))
+        if(collider.TryGetComponent(out Shop shop))
         {
-            Wallet otherWallet = collider.GetComponent<IGiver>().GetWallet();
-            TryBuy(otherWallet);
+            // TODO сделать вызов панели магазина
         }
     }
 
@@ -64,12 +60,6 @@ public class CashExchanger : MonoBehaviour
     {
         wallet.AddValue(_wallet.Value);
         _wallet.RemoveValue(_changedValue);
-    }
-
-    private void TryBuy(Wallet wallet)
-    {
-        if(_wallet.CanBuy(wallet.FixedPrice))
-            _wallet.RemoveFixedValue(wallet.FixedPrice);
     }
 
     private void SetChangedValue(int value)

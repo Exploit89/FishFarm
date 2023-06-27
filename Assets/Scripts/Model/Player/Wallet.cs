@@ -1,15 +1,12 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Wallet
+public class Wallet : MonoBehaviour
 {
-    private int _easyValue = 10000;
-    private int _normalValue = 5000;
-    private int _hardValue = 0;
-    private int _maxValue = 0;
+    private int _startMoney = 1000;
+    private int _maxValue = 100000;
 
     public int Value { get; private set; }
-    public int FixedPrice { get; private set; }
 
     public event UnityAction<int> OnValueChanged;
 
@@ -25,19 +22,10 @@ public class Wallet
         return value;
     }
 
-    public int GetStartMoney(DifficultySetup difficulty)
+    public void GetStartMoney()
     {
-        switch (difficulty.DifficultyLevel)
-        {
-            case Difficulty.Easy:
-                return _easyValue;
-            case Difficulty.Normal:
-                return _normalValue;
-            case Difficulty.Hard:
-                return _hardValue;
-            default:
-                return 0;
-        }
+        Value = _startMoney;
+        OnValueChanged?.Invoke(Value);
     }
 
     public void AddValue(int value)
@@ -73,22 +61,8 @@ public class Wallet
         Debug.Log("value removed, total = " + Value);
     }
 
-    public void SetFixedPrice(int value)
+    public void SetMaxCash(int value)
     {
-        FixedPrice = value;
-    }
-
-    //public Wallet(DifficultySetup difficulty, int maxValue = 0)
-    //{
-    //    _maxValue = maxValue;
-    //    Value = GetStartMoney(difficulty);
-    //    OnValueChanged?.Invoke(Value);
-    //}
-
-    public Wallet(int maxValue = 0, int value = 0)
-    {
-        _maxValue = maxValue;
-        FixedPrice = maxValue;
-        Value = value;
+        _maxValue = value;
     }
 }
