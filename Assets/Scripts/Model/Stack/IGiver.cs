@@ -11,6 +11,8 @@ public class IGiver : MonoBehaviour
     private Wallet _wallet;
     private int _maxCash;
 
+    public bool CanGiveCash { get; private set; } = false;
+
     private void Awake()
     {
         _wallet = GetComponent<Wallet>();
@@ -27,5 +29,10 @@ public class IGiver : MonoBehaviour
         List<ProductType> products = new List<ProductType>();
         products = _productTypes;
         return products;
+    }
+
+    public void SetGiveable(bool flag)
+    {
+        CanGiveCash = flag;
     }
 }

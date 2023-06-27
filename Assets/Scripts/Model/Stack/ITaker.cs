@@ -10,6 +10,8 @@ public class ITaker : MonoBehaviour
 
     private Wallet _wallet;
 
+    public bool CanTakeCash { get; private set; } = false;
+
     private void Awake()
     {
         _wallet = GetComponent<Wallet>();
@@ -25,5 +27,10 @@ public class ITaker : MonoBehaviour
         List<ProductType> products = new List<ProductType>();
         products = _productTypes;
         return products;
+    }
+
+    public void SetTakeable(bool flag)
+    {
+        CanTakeCash = flag;
     }
 }

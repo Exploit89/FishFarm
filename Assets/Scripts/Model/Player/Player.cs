@@ -19,14 +19,11 @@ public class Player : MonoBehaviour
     private void Awake()
     {
         _wallet = GetComponent<Wallet>();
-        WalletCreated?.Invoke(_wallet);
     }
 
     private void Start()
     {
         _wallet.GetStartMoney();
-        Debug.Log(_wallet.Value);
-        WalletCreated?.Invoke(_wallet);
         _bag = GetComponent<Bag>();
         _stackMover = GetComponent<StackMover>();
         _capacity = GetComponent<Capacity>();

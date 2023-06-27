@@ -4,9 +4,9 @@ using UnityEngine.Events;
 public class Wallet : MonoBehaviour
 {
     private int _startMoney = 1000;
-    private int _maxValue = 100000;
+    private int _maxCash = 0;
 
-    public int Value { get; private set; }
+    public int Value { get; private set; } = 0;
 
     public event UnityAction<int> OnValueChanged;
 
@@ -17,8 +17,14 @@ public class Wallet : MonoBehaviour
 
     private int GetPossibleValue(int value)
     {
-        if(value >= _maxValue - Value)
-            return _maxValue - Value;
+        if (value >= _maxCash - Value)
+        {
+            if (_maxCash - Value == 0)
+            {
+                return 0;
+            }
+            return _maxCash - Value;
+        }
         return value;
     }
 
@@ -28,12 +34,12 @@ public class Wallet : MonoBehaviour
         OnValueChanged?.Invoke(Value);
     }
 
-    public void AddValue(int value)
+    public int AddValue(int value)
     {
         int possibleValue = GetPossibleValue(value);
         Value += possibleValue;
-        OnValueChanged?.Invoke(possibleValue);
-        Debug.Log("value added, total = " + possibleValue);
+        OnValueChanged?.Invoke(Value);
+        return possibleValue;
     }
 
     public bool CanBuy(int value)
@@ -49,20 +55,18 @@ public class Wallet : MonoBehaviour
         if (IsEnoughValue(value))
         {
             Value -= value;
-            OnValueChanged?.Invoke(value);
-            Debug.Log("value removed, total = " + Value);
+            OnValueChanged?.Invoke(Value);
         }
     }
 
     public void RemoveFixedValue(int value)
     {
         Value -= value;
-        OnValueChanged?.Invoke(value);
-        Debug.Log("value removed, total = " + Value);
+        OnValueChanged?.Invoke(Value);
     }
 
     public void SetMaxCash(int value)
     {
-        _maxValue = value;
+        _maxCash = value;
     }
 }
