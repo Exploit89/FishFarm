@@ -30,14 +30,12 @@ public class StackExchanger : MonoBehaviour
         if (collider.TryGetComponent(out ITaker iTaker))
         {
             StackMover otherStackMover = collider.GetComponent<StackMover>();
-            Debug.Log(otherStackMover.GetStacks().Count);
             TryGive(otherStackMover);
         }
 
         if(collider.TryGetComponent(out IGiver iGiver))
         {
             StackMover otherStackMover = collider.GetComponent<StackMover>();
-            Debug.Log(otherStackMover.GetStacks().Count);
             TryTake(otherStackMover);
         }
     }

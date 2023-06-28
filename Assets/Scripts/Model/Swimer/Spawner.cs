@@ -13,12 +13,16 @@ public class Spawner : MonoBehaviour
     void Awake()
     {
         _fishes = new List<Swimer>();
-        //InstantiateFish();
     }
 
     private void OnEnable()
     {
         _playerCashExchanger.ItemBought += InstantiateFish;
+    }
+
+    private void OnDisable()
+    {
+        _playerCashExchanger.ItemBought -= InstantiateFish;
     }
 
     public void InstantiateFish(Item item)
@@ -28,10 +32,5 @@ public class Spawner : MonoBehaviour
         fish.GetComponent<Swimer>().Init(this, _attractor);
         swimer.transform.SetParent(fishAnchor);
         _fishes.Add(swimer);
-
-        //if (_fishes.Count < _fishNumber)
-        //{
-        //    Invoke("InstantiateFish", _spawnDelay);
-        //}
     }
 }

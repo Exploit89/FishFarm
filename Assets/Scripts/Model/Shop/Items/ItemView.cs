@@ -17,19 +17,11 @@ public class ItemView : MonoBehaviour
     private void OnEnable()
     {
         _sellButton.onClick.AddListener(OnButtonClick);
-        _sellButton.onClick.AddListener(TryLockItem);
     }
 
     private void OnDisable()
     {
         _sellButton.onClick.RemoveListener(OnButtonClick);
-        _sellButton.onClick.RemoveListener(TryLockItem);
-    }
-
-    private void TryLockItem()
-    {
-        if (_item.IsBuyed)
-            _sellButton.interactable = false;
     }
 
     private void OnButtonClick()
