@@ -6,10 +6,13 @@ using UnityEngine.Events;
 public class CashExchanger : MonoBehaviour
 {
     [SerializeField] private Wallet _playerWallet;
+    [SerializeField] private GameObject _shop;
 
     private int _changedValue = 0;
 
     public event UnityAction<Item> ItemBought;
+    public event UnityAction<GameObject> ShopEntered;
+    public event UnityAction<GameObject> ShopLeft;
 
     private void OnEnable()
     {
@@ -35,9 +38,19 @@ public class CashExchanger : MonoBehaviour
             TryTake(otherWallet);
         }
 
-        if(collider.TryGetComponent(out Shop shop))
+        if(collider.TryGetComponent(out ShopBuilding shop))
         {
-            // TODO сделать вызов панели магазина
+            ShopEntered?.Invoke(_shop);
+            Debug.Log("shop entered");
+        }
+    }
+
+    private void OnTriggerExit(Collider collider)
+    {
+        if (collider.TryGetComponent(out ShopBuilding shop))
+        {
+            ShopLeft?.Invoke(_shop);
+            Debug.Log("shop left");
         }
     }
 

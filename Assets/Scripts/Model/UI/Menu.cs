@@ -4,10 +4,23 @@ public class Menu : MonoBehaviour
 {
     [SerializeField] private GameObject _menuPanel;
     [SerializeField] private GameObject _cashPanel;
+    [SerializeField] private CashExchanger _playerCashExchanger;
 
     private void Start()
     {
         OpenPanel(_menuPanel);
+    }
+
+    private void OnEnable()
+    {
+        _playerCashExchanger.ShopEntered += OpenPanel;
+        _playerCashExchanger.ShopLeft += ClosePanel;
+    }
+
+    private void OnDisable()
+    {
+        _playerCashExchanger.ShopEntered -= OpenPanel;
+        _playerCashExchanger.ShopLeft -= ClosePanel;
     }
 
     public void OpenPanel(GameObject panel)
