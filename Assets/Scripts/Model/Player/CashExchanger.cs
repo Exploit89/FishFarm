@@ -12,7 +12,7 @@ public class CashExchanger : MonoBehaviour
 
     public event UnityAction<Item> ItemBought;
     public event UnityAction<GameObject> ShopEntered;
-    public event UnityAction<GameObject> ShopLeft;
+    public event UnityAction NotEnoughCash;
 
     private void OnEnable()
     {
@@ -41,16 +41,6 @@ public class CashExchanger : MonoBehaviour
         if(collider.TryGetComponent(out ShopBuilding shop))
         {
             ShopEntered?.Invoke(_shop);
-            Debug.Log("shop entered");
-        }
-    }
-
-    private void OnTriggerExit(Collider collider)
-    {
-        if (collider.TryGetComponent(out ShopBuilding shop))
-        {
-            ShopLeft?.Invoke(_shop);
-            Debug.Log("shop left");
         }
     }
 
@@ -77,6 +67,10 @@ public class CashExchanger : MonoBehaviour
         {
             _playerWallet.RemoveFixedValue(item.Price);
             ItemBought?.Invoke(item);
+        }
+        else
+        {
+            NotEnoughCash?.Invoke();
         }
     }
 }

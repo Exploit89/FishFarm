@@ -14,13 +14,11 @@ public class Menu : MonoBehaviour
     private void OnEnable()
     {
         _playerCashExchanger.ShopEntered += OpenPanel;
-        _playerCashExchanger.ShopLeft += ClosePanel;
     }
 
     private void OnDisable()
     {
         _playerCashExchanger.ShopEntered -= OpenPanel;
-        _playerCashExchanger.ShopLeft -= ClosePanel;
     }
 
     public void OpenPanel(GameObject panel)

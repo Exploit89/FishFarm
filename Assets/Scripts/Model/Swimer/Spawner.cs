@@ -6,19 +6,22 @@ public class Spawner : MonoBehaviour
     [SerializeField] private GameObject _fishPrefab;
     [SerializeField] private Transform fishAnchor;
     [SerializeField] private Attractor _attractor;
-    [SerializeField] private int _fishNumber = 10;
-    [SerializeField] private float _spawnDelay = 0.1f;
+    [SerializeField] private CashExchanger _playerCashExchanger;
 
     private List<Swimer> _fishes;
 
     void Awake()
     {
         _fishes = new List<Swimer>();
-        InstantiateFish();
+        //InstantiateFish();
     }
 
-    // TODO change to normal start spawn and next spawn
-    public void InstantiateFish()
+    private void OnEnable()
+    {
+        _playerCashExchanger.ItemBought += InstantiateFish;
+    }
+
+    public void InstantiateFish(Item item)
     {
         GameObject fish = Instantiate(_fishPrefab, gameObject.transform);
         Swimer swimer = fish.GetComponent<Swimer>();
@@ -26,9 +29,9 @@ public class Spawner : MonoBehaviour
         swimer.transform.SetParent(fishAnchor);
         _fishes.Add(swimer);
 
-        if (_fishes.Count < _fishNumber)
-        {
-            Invoke("InstantiateFish", _spawnDelay);
-        }
+        //if (_fishes.Count < _fishNumber)
+        //{
+        //    Invoke("InstantiateFish", _spawnDelay);
+        //}
     }
 }

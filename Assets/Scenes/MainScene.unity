@@ -3385,8 +3385,7 @@ MonoBehaviour:
   _fishPrefab: {fileID: 8983783080281965222, guid: 18f063372c7b2bd4d9f7eecb93f9abdc, type: 3}
   fishAnchor: {fileID: 1450802561}
   _attractor: {fileID: 2018772983}
-  _fishNumber: 10
-  _spawnDelay: 0.1
+  _playerCashExchanger: {fileID: 840123780}
 --- !u!1 &1084712550
 GameObject:
   m_ObjectHideFlags: 0

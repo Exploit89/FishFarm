@@ -25,10 +25,10 @@ public class Shop : MonoBehaviour
 
     private void OnSellButtonClick(Item item, ItemView view)
     {
-        TrySellWeapon(item, view);
+        TrySellItem(item, view);
     }
 
-    private void TrySellWeapon(Item item, ItemView view)
+    private void TrySellItem(Item item, ItemView view)
     {
         _player.GetComponent<CashExchanger>().TryShopBuy(item);
         item.Buy();

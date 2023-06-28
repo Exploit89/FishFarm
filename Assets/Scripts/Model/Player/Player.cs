@@ -14,8 +14,6 @@ public class Player : MonoBehaviour
     private StackMover _stackMover;
     private int _startCapacity = 100;
 
-    public event UnityAction<Wallet> WalletCreated;
-
     private void Awake()
     {
         _wallet = GetComponent<Wallet>();
