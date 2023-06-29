@@ -7,6 +7,7 @@ public class StartButton : MonoBehaviour
     [SerializeField] private Button _startButton;
     [SerializeField] private GameObject _menuPanel;
     [SerializeField] private GameObject _cashPanel;
+    [SerializeField] private GameObject _stacksPanel;
 
     private void OnEnable()
     {
@@ -23,5 +24,6 @@ public class StartButton : MonoBehaviour
         _menu.ClosePanel(_menuPanel);
         _menu.GetComponent<Image>().enabled = false;
         _cashPanel.SetActive(true);
+        _stacksPanel.SetActive(true);
     }
 }

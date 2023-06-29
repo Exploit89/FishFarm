@@ -3,7 +3,6 @@ using UnityEngine;
 public class Menu : MonoBehaviour
 {
     [SerializeField] private GameObject _menuPanel;
-    [SerializeField] private GameObject _cashPanel;
     [SerializeField] private CashExchanger _playerCashExchanger;
 
     private void Start()

@@ -8,6 +8,8 @@ using UnityEngine.Events;
 
 public class Player : MonoBehaviour
 {
+    [SerializeField] private StackUIPanel _StackUIPanel;
+
     private Wallet _wallet;
     private Bag _bag;
     private Capacity _capacity;
@@ -28,5 +30,6 @@ public class Player : MonoBehaviour
         _capacity = GetComponent<Capacity>();
         _capacity.SetCapacity(_startCapacity);
         _stackMover.CreateStacks(_startStackValue);
+        _StackUIPanel.CreateUIStackView();
     }
 }
