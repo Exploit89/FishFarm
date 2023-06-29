@@ -11,27 +11,13 @@ public class Storage : MonoBehaviour
     private StackMover _stackMover;
     private string _name;
     private int _startCapacity = 50;
+    private int _startStackValue = 0;
 
     private void Start()
     {
         _stackMover = GetComponent<StackMover>();
-        _stackMover.CreateStacks();
+        _stackMover.CreateStacks(_startStackValue);
         _capacity = GetComponent<Capacity>();
         _capacity.SetCapacity(_startCapacity);
-    }
-
-    private void OnEnable()
-    {
-
-    }
-
-    private void TakeStack(Stack stack)
-    {
-        _stackMover.AddProductCount(stack);
-    }
-
-    private void DropStack(Stack stack)
-    {
-        _stackMover.RemoveProductCount(stack);
     }
 }

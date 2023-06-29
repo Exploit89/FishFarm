@@ -13,6 +13,7 @@ public class Player : MonoBehaviour
     private Capacity _capacity;
     private StackMover _stackMover;
     private int _startCapacity = 100;
+    private int _startStackValue = 20; // test
 
     private void Awake()
     {
@@ -26,6 +27,6 @@ public class Player : MonoBehaviour
         _stackMover = GetComponent<StackMover>();
         _capacity = GetComponent<Capacity>();
         _capacity.SetCapacity(_startCapacity);
-        _stackMover.CreateStacks();
+        _stackMover.CreateStacks(_startStackValue);
     }
 }

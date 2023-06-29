@@ -6,11 +6,12 @@ public class StackCreator : MonoBehaviour
 {
     [SerializeField] private Stack _stackPrefab;
 
-    private int _startQuantity = 10;
+    private int _startQuantity = 0;
 
-    public List<Stack> CreateStacks()
+    public List<Stack> CreateStacks(int value)
     {
         List<Stack> stacks = new List<Stack>();
+        _startQuantity = value;
 
         foreach (ProductType productType in Enum.GetValues(typeof(ProductType)))
         {

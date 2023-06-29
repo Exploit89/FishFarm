@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(StackMover))]
 
@@ -6,6 +7,7 @@ public class StackExchanger : MonoBehaviour
 {
     private StackMover _stackMover;
     private int _changedValue = 0;
+    private bool _isGiven = false;
 
     private void Awake()
     {
@@ -33,7 +35,7 @@ public class StackExchanger : MonoBehaviour
             TryGive(otherStackMover);
         }
 
-        if(collider.TryGetComponent(out IGiver iGiver))
+        if(collider.TryGetComponent(out IGiver iGiver) && !_isGiven)
         {
             StackMover otherStackMover = collider.GetComponent<StackMover>();
             TryTake(otherStackMover);
@@ -44,6 +46,7 @@ public class StackExchanger : MonoBehaviour
     {
         if (collider.TryGetComponent(out StackMover stackMover))
             stackMover.OnStackChanged -= SetChangedValue;
+        _isGiven = false;
     }
 
     private void TryTake(StackMover stackMover)
@@ -64,8 +67,15 @@ public class StackExchanger : MonoBehaviour
         {
             if (stackMover.GetComponent<ITaker>().GetProductTypes().Contains(item.Product.ProductType))
             {
-                stackMover.AddProductCount(item);
-                _stackMover.RemoveProductCount(item, _changedValue);
+                if(item.Quantity > 0)
+                {
+                    stackMover.AddProductCount(item);
+                    _stackMover.RemoveProductCount(item, _changedValue);
+
+                    if (_changedValue > 0)
+                        _isGiven = true;
+                    _changedValue = 0;
+                }
             }
         }
     }
