@@ -2,7 +2,6 @@ using UnityEngine;
 using UnityEngine.Events;
 
 [RequireComponent(typeof(StackMover))]
-[RequireComponent(typeof(Capacity))]
 [RequireComponent(typeof(Bag))]
 [RequireComponent(typeof(Wallet))]
 
@@ -12,9 +11,7 @@ public class Player : MonoBehaviour
 
     private Wallet _wallet;
     private Bag _bag;
-    private Capacity _capacity;
     private StackMover _stackMover;
-    private int _startCapacity = 100;
     private int _startStackValue = 20; // test
 
     private void Awake()
@@ -27,8 +24,6 @@ public class Player : MonoBehaviour
         _wallet.GetStartMoney();
         _bag = GetComponent<Bag>();
         _stackMover = GetComponent<StackMover>();
-        _capacity = GetComponent<Capacity>();
-        _capacity.SetCapacity(_startCapacity);
         _stackMover.CreateStacks(_startStackValue);
         _StackUIPanel.CreateUIStackView();
     }

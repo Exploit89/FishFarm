@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -16,5 +17,10 @@ public class StackUIView : MonoBehaviour
         _label.text = _stack.Label;
         _icon.sprite = _stack.Icon;
         _count.text = _stack.Quantity.ToString();
+    }
+
+    public int GetCount()
+    {
+        return Convert.ToInt32(_count.text);
     }
 }

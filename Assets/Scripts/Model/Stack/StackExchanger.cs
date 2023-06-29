@@ -9,6 +9,8 @@ public class StackExchanger : MonoBehaviour
     private int _changedValue = 0;
     private bool _isGiven = false;
 
+    public event UnityAction UpdateStackCount;
+
     private void Awake()
     {
         _stackMover = GetComponent<StackMover>();
@@ -33,12 +35,14 @@ public class StackExchanger : MonoBehaviour
         {
             StackMover otherStackMover = collider.GetComponent<StackMover>();
             TryGive(otherStackMover);
+            UpdateStackCount?.Invoke();
         }
 
         if(collider.TryGetComponent(out IGiver iGiver) && !_isGiven)
         {
             StackMover otherStackMover = collider.GetComponent<StackMover>();
             TryTake(otherStackMover);
+            UpdateStackCount?.Invoke();
         }
     }
 

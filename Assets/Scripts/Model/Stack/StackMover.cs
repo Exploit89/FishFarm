@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-[RequireComponent(typeof(Capacity))]
 [RequireComponent(typeof(StackCreator))]
 
 public class StackMover : MonoBehaviour
@@ -10,7 +9,6 @@ public class StackMover : MonoBehaviour
     [SerializeField] private List<Stack> _products;
 
     private StackCreator _stackCreator;
-    private int _freeCapacity = 0;
 
     public event UnityAction<int> OnStackChanged;
 
@@ -20,32 +18,10 @@ public class StackMover : MonoBehaviour
         _stackCreator = GetComponent<StackCreator>();
     }
 
-    private void Start()
-    {
-        _freeCapacity = GetComponent<Capacity>().FreeCapacity;
-    }
-
     private void ClearStacks()
     {
         if (_products != null)
             _products.Clear();
-    }
-
-    private int GetPossibleQuantity(int spaceToCapture)
-    {
-        int possibleSpace = 0;
-        int neededSpace = _freeCapacity - spaceToCapture;
-        Debug.Log("needed space = " + neededSpace);
-
-        if (neededSpace < 0)
-        {
-            possibleSpace = spaceToCapture + neededSpace;
-            _freeCapacity = 0;
-            Debug.Log("returned possible = " + possibleSpace);
-            return possibleSpace;
-        }
-        _freeCapacity -= spaceToCapture;
-        return spaceToCapture;
     }
 
     public void CreateStacks(int value)
@@ -60,16 +36,16 @@ public class StackMover : MonoBehaviour
         {
             if (item.Product.ProductType == stack.Product.ProductType)
             {
-                int possibleQuantity = GetPossibleQuantity(stack.Quantity);
-
-                if(possibleQuantity > item.GetMaxQuantity())
+                if (stack.Quantity <= item.GetMaxQuantity())
                 {
-                    Debug.Log("possible qty = " + possibleQuantity);
-                    OnStackChanged?.Invoke(possibleQuantity);
-                    item.IncreaseQuantity(possibleQuantity);
+                    OnStackChanged?.Invoke(stack.Quantity);
+                    item.IncreaseQuantity(stack.Quantity);
                 }
-                OnStackChanged?.Invoke(item.GetMaxQuantity());
-                item.IncreaseQuantity(item.GetMaxQuantity());
+                else
+                {
+                    OnStackChanged?.Invoke(item.GetMaxQuantity());
+                    item.IncreaseQuantity(item.GetMaxQuantity());
+                }
             }
         }
     }
@@ -81,9 +57,7 @@ public class StackMover : MonoBehaviour
             if (item.Product.ProductType == stack.Product.ProductType)
             {
                 item.DecreaseQuantity(value);
-                _freeCapacity += value;
                 OnStackChanged?.Invoke(value);
-                Debug.Log("event value to remove = " + value);
             }
         }
     }

@@ -12,15 +12,10 @@ public class Stack : MonoBehaviour
 
     public void IncreaseQuantity(int value)
     {
-        Debug.Log("qty to try increase = " + value);
         if(Quantity + value <= _maxQuantity)
-        {
             Quantity += value;
-            Debug.Log("qty increase = " + Quantity);
-        }
         else 
             Quantity = _maxQuantity;
-        Debug.Log("Quantity increased, now it = " + Quantity);
     }
 
     public void DecreaseQuantity(int value)
@@ -29,7 +24,6 @@ public class Stack : MonoBehaviour
             Quantity -= value;
         else
             Quantity = 0;
-        Debug.Log("Quantity decreased, now it = " + Quantity);
     }
 
     public void Initialize(Product product, int quantity, Sprite icon)
