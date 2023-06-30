@@ -36,15 +36,17 @@ public class StackMover : MonoBehaviour
         {
             if (item.Product.ProductType == stack.Product.ProductType)
             {
-                if (stack.Quantity <= item.GetMaxQuantity())
+                int freeSpace = item.GetMaxQuantity() - item.Quantity;
+
+                if (stack.Quantity <= freeSpace)
                 {
                     OnStackChanged?.Invoke(stack.Quantity);
                     item.IncreaseQuantity(stack.Quantity);
                 }
                 else
                 {
-                    OnStackChanged?.Invoke(item.GetMaxQuantity());
-                    item.IncreaseQuantity(item.GetMaxQuantity());
+                    OnStackChanged?.Invoke(freeSpace);
+                    item.IncreaseQuantity(freeSpace);
                 }
             }
         }

@@ -12,7 +12,7 @@ public class Player : MonoBehaviour
     private Wallet _wallet;
     private Bag _bag;
     private StackMover _stackMover;
-    private int _startStackValue = 20; // test
+    private int _startStackValue = 30; // test
 
     private void Awake()
     {
