@@ -28,6 +28,8 @@ public class Spawner : MonoBehaviour
     public void InstantiateFish(Item item)
     {
         GameObject fish = Instantiate(_fishPrefab, gameObject.transform);
+        Fish fishComponent = fish.GetComponent<Fish>();
+        fishComponent.Init(item);
         Swimer swimer = fish.GetComponent<Swimer>();
         fish.GetComponent<Swimer>().Init(this, _attractor);
         swimer.transform.SetParent(fishAnchor);

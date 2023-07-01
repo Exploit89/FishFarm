@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4257006809193042012}
   - component: {fileID: 4723743847258297179}
   m_Layer: 0
-  m_Name: ItemExample
+  m_Name: SquareFIsh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44,7 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce24b39797b20b54eac15cb87f39d2cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _icon: {fileID: 21300000, guid: e922b8965acec714aa4d154be115e1f2, type: 3}
-  _label: BallFIsh
-  _price: 500
-  _isBuyed: 0
+  _icon: {fileID: 21300000, guid: ba8528aec2672e8479e58da192e1fe8e, type: 3}
+  _label: SquareFish
+  _price: 2000
+  _quality: 1
+  _maxLifeDays: 10

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using static UnityEditor.Progress;
 
 [RequireComponent(typeof(StackCreator))]
 
@@ -69,5 +70,31 @@ public class StackMover : MonoBehaviour
         List<Stack> list = new List<Stack>();
         list = _products;
         return list;
+    }
+
+    //TODO надо подписаться на событие бассейна + какого хрена в бассейн можно сложить рыбу?!
+    public void AddFreshValue(int value)
+    {
+        if(GetComponentInParent<GameObject>().TryGetComponent(out Pool pool))
+        {
+            foreach (var item in _products)
+            {
+                if (item.Product.ProductType == ProductType.Fresh)
+                {
+                    int freeSpace = item.GetMaxQuantity() - item.Quantity;
+
+                    if (value <= freeSpace)
+                    {
+                        OnStackChanged?.Invoke(value);
+                        item.IncreaseQuantity(value);
+                    }
+                    else
+                    {
+                        OnStackChanged?.Invoke(freeSpace);
+                        item.IncreaseQuantity(freeSpace);
+                    }
+                }
+            }
+        }
     }
 }

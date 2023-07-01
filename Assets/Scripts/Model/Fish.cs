@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -12,22 +13,25 @@ public enum Quality
 public class Fish : MonoBehaviour
 {
     private DayCounter _dayCounter;
-    private string _name;
     private Quality _quality;
-    private int _growthDays;
     private int _lifeDays;
     private int _maxLifeDays;
-    private int _health;
-    private int _maxHealth;
-    private int _growthWeightValue;
-    private int _deadWeight;
-    private int _maxWeight;
-    private float _weight;
 
-    public event UnityAction FishDied;
+    private Dictionary<Quality, int> _freshProductValues = new Dictionary<Quality, int>()
+    {
+        { Quality.Low, 1 },
+        { Quality.Medium, 2 },
+        { Quality.High, 3 },
+        { Quality.Extra, 5 }
+    };
+
+    public string Name { get; private set; }
+
+    public event UnityAction<int> FishReady;
 
     private void OnEnable()
     {
+
         _dayCounter = gameObject.AddComponent<DayCounter>();
         _dayCounter.DayPassed += PassOneDay;
     }
@@ -37,53 +41,20 @@ public class Fish : MonoBehaviour
         _dayCounter.DayPassed -= PassOneDay;
     }
 
-    private bool IsDeadWeight()
-    {
-        return _deadWeight > _weight;
-    }
-
-    public void AddWeight(float multiplier)
-    {
-        _weight += multiplier * _growthWeightValue;
-
-        if (_weight > _maxWeight )
-            _weight = _maxWeight;
-    }
-
-    public void RemoveWeight(float multiplier)
-    {
-        _weight /= multiplier;
-
-        if (IsDeadWeight())
-            FishDied?.Invoke();
-    }
-
-    public void AddHealth()
-    {
-        _health++;
-
-        if (_health > _maxHealth)
-            _health = _maxHealth;
-    }
-
-    public void RemoveHealth()
-    {
-        _health--;
-
-        if(_health <= 0)
-        {
-            _health = 0;
-            FishDied?.Invoke();
-        }
-    }
-
     public void PassOneDay()
     {
         _lifeDays++;
 
         if (_lifeDays > _maxLifeDays)
         {
-            FishDied?.Invoke();
+            FishReady?.Invoke(_freshProductValues[_quality]);
         }
+    }
+
+    public void Init(Item item)
+    {
+        Name = item.name;
+        _quality = item.Quality;
+        _maxLifeDays = item.MaxLifeDays;
     }
 }

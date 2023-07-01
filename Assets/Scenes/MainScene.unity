@@ -1991,15 +1991,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _items:
   - {fileID: 4723743847258297179, guid: 121ca0443f17f2b43977a6dccd50a3d5, type: 3}
-  - {fileID: 4723743847258297179, guid: 121ca0443f17f2b43977a6dccd50a3d5, type: 3}
-  - {fileID: 4723743847258297179, guid: 121ca0443f17f2b43977a6dccd50a3d5, type: 3}
-  - {fileID: 4723743847258297179, guid: 121ca0443f17f2b43977a6dccd50a3d5, type: 3}
-  - {fileID: 4723743847258297179, guid: 121ca0443f17f2b43977a6dccd50a3d5, type: 3}
-  - {fileID: 4723743847258297179, guid: 121ca0443f17f2b43977a6dccd50a3d5, type: 3}
-  - {fileID: 4723743847258297179, guid: 121ca0443f17f2b43977a6dccd50a3d5, type: 3}
-  - {fileID: 4723743847258297179, guid: 121ca0443f17f2b43977a6dccd50a3d5, type: 3}
-  - {fileID: 4723743847258297179, guid: 121ca0443f17f2b43977a6dccd50a3d5, type: 3}
-  - {fileID: 4723743847258297179, guid: 121ca0443f17f2b43977a6dccd50a3d5, type: 3}
+  - {fileID: 4723743847258297179, guid: 0a2efe8b6f1478c4ea29632d918df41b, type: 3}
   _playerCashExchanger: {fileID: 840123780}
   _template: {fileID: 5403313898944571389, guid: e310b3043c5b74049bed5e1a3041ac34, type: 3}
   _itemContainer: {fileID: 615515320}
