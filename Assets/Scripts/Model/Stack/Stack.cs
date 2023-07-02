@@ -14,7 +14,7 @@ public class Stack : MonoBehaviour
     {
         if(Quantity + value <= _maxQuantity)
             Quantity += value;
-        else 
+        else if(value != 0)
             Quantity = _maxQuantity;
     }
 

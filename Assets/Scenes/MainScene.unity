@@ -365,6 +365,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _products: []
+  _fishEvents: {fileID: 0}
 --- !u!65 &61476837
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -778,6 +779,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _products: []
+  _fishEvents: {fileID: 0}
 --- !u!114 &313196489
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2154,6 +2156,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _products: []
+  _fishEvents: {fileID: 0}
 --- !u!114 &736620689
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2503,6 +2506,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _products: []
+  _fishEvents: {fileID: 0}
 --- !u!114 &775539960
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2748,6 +2752,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _products: []
+  _fishEvents: {fileID: 0}
 --- !u!114 &782924984
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2992,6 +2997,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _products: []
+  _fishEvents: {fileID: 0}
 --- !u!114 &837141909
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3207,6 +3213,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _products: []
+  _fishEvents: {fileID: 0}
 --- !u!114 &840123778
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4308,6 +4315,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _products: []
+  _fishEvents: {fileID: 0}
 --- !u!65 &1089348658
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4765,6 +4773,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1450802561}
+  - component: {fileID: 1450802562}
   m_Layer: 0
   m_Name: SwimAnchor
   m_TagString: Untagged
@@ -4787,6 +4796,19 @@ Transform:
   m_Father: {fileID: 1061407453}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1450802562
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1450802560}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 001381ba56358f946be7d691ff0ced2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _spawner: {fileID: 1061407458}
 --- !u!1 &1562691890
 GameObject:
   m_ObjectHideFlags: 0
@@ -5498,6 +5520,7 @@ GameObject:
   - component: {fileID: 1931948863}
   - component: {fileID: 1931948862}
   - component: {fileID: 1931948861}
+  - component: {fileID: 1931948871}
   m_Layer: 0
   m_Name: PoolStorage
   m_TagString: Untagged
@@ -5588,6 +5611,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _products: []
+  _fishEvents: {fileID: 1450802562}
 --- !u!114 &1931948867
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5663,6 +5687,18 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1931948859}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1931948871
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1931948859}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc9140a1f6363ef43b8ce4e338eb29ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1945407287
 GameObject:
   m_ObjectHideFlags: 0

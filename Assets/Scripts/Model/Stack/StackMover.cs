@@ -1,13 +1,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-using static UnityEditor.Progress;
 
 [RequireComponent(typeof(StackCreator))]
 
 public class StackMover : MonoBehaviour
 {
     [SerializeField] private List<Stack> _products;
+    [SerializeField] private FishEvents _fishEvents;
 
     private StackCreator _stackCreator;
 
@@ -17,6 +17,30 @@ public class StackMover : MonoBehaviour
     {
         _products = new List<Stack>();
         _stackCreator = GetComponent<StackCreator>();
+    }
+
+    private void OnEnable()
+    {
+        if(gameObject.TryGetComponent(out PoolStorage poolStorage))
+        {
+            _fishEvents.FishAdded += SubscribeOnFish;
+        }
+    }
+
+    private void OnDisable()
+    {
+        if (gameObject.TryGetComponent(out Pool pool))
+        {
+            foreach (var item in _fishEvents.GetFishList())
+            {
+                item.FishReady -= AddFreshValue;
+            }
+        }
+    }
+
+    private void SubscribeOnFish(Fish fish)
+    {
+        fish.FishReady += AddFreshValue;
     }
 
     private void ClearStacks()
@@ -38,6 +62,9 @@ public class StackMover : MonoBehaviour
             if (item.Product.ProductType == stack.Product.ProductType)
             {
                 int freeSpace = item.GetMaxQuantity() - item.Quantity;
+
+                if (freeSpace < 0)
+                    freeSpace = 0;
 
                 if (stack.Quantity <= freeSpace)
                 {
@@ -72,10 +99,9 @@ public class StackMover : MonoBehaviour
         return list;
     }
 
-    //TODO надо подписаться на событие бассейна + какого хрена в бассейн можно сложить рыбу?!
     public void AddFreshValue(int value)
     {
-        if(GetComponentInParent<GameObject>().TryGetComponent(out Pool pool))
+        if(gameObject.TryGetComponent(out PoolStorage poolStorage))
         {
             foreach (var item in _products)
             {

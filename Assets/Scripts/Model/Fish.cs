@@ -45,9 +45,10 @@ public class Fish : MonoBehaviour
     {
         _lifeDays++;
 
-        if (_lifeDays > _maxLifeDays)
+        if (_lifeDays >= _maxLifeDays)
         {
             FishReady?.Invoke(_freshProductValues[_quality]);
+            _lifeDays = 0;
         }
     }
 
