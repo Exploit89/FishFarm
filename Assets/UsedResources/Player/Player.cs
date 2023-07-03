@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.Events;
 
 [RequireComponent(typeof(StackMover))]
 [RequireComponent(typeof(Bag))]
