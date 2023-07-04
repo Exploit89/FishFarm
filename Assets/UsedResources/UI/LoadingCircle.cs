@@ -7,6 +7,6 @@ public class LoadingCircle : MonoBehaviour
 
     private void Start()
     {
-        _spriteRenderer.sprite.textureRect.
+        
     }
 }
