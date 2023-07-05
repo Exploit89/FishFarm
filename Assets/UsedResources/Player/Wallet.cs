@@ -19,7 +19,7 @@ public class Wallet : MonoBehaviour
     {
         if (value >= _maxCash - Value)
         {
-            if (_maxCash - Value == 0)
+            if (_maxCash - Value == 0 && Value != 0) //fffffffffffffff
             {
                 return 0;
             }
@@ -68,5 +68,10 @@ public class Wallet : MonoBehaviour
     public void SetMaxCash(int value)
     {
         _maxCash = value;
+    }
+
+    public int GetMaxValue()
+    {
+        return _maxCash;
     }
 }
