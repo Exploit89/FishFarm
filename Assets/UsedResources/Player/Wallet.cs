@@ -19,7 +19,7 @@ public class Wallet : MonoBehaviour
     {
         if (value >= _maxCash - Value)
         {
-            if (_maxCash - Value == 0 && Value != 0) //fffffffffffffff
+            if (_maxCash - Value == 0 && Value != 0)
             {
                 return 0;
             }

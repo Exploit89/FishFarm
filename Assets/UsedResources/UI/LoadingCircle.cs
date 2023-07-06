@@ -1,3 +1,5 @@
+using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -6,6 +8,7 @@ public class LoadingCircle : MonoBehaviour
     [SerializeField] private Image _image;
     [SerializeField] private Transform _gameObject;
     [SerializeField] private Wallet _wallet;
+    [SerializeField] private TMP_Text _label;
 
     private int _fillValue = 0;
     private int _maxValue = 0;
@@ -13,6 +16,7 @@ public class LoadingCircle : MonoBehaviour
     private void Start()
     {
         _maxValue = _wallet.GetMaxValue();
+        _label.text = _fillValue.ToString() + "/" + _maxValue.ToString();
         _image.fillAmount = _fillValue;
     }
 
@@ -28,8 +32,8 @@ public class LoadingCircle : MonoBehaviour
 
     private void UpdateFillValue(int value)
     {
-        Debug.Log(_maxValue);
-        Debug.Log(value);
-        _image.fillAmount = value / _maxValue;
+        float currentValue = value / (float)_maxValue;
+        _image.fillAmount = currentValue;
+        _label.text = value.ToString() + "/" + _maxValue.ToString();
     }
 }
