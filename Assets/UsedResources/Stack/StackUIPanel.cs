@@ -1,6 +1,7 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Rendering;
+using static UnityEditor.Progress;
 
 public class StackUIPanel : MonoBehaviour
 {
@@ -54,8 +55,16 @@ public class StackUIPanel : MonoBehaviour
 
         foreach (var item in _itemContainer.GetComponentsInChildren<StackUIView>())
         {
-            if(item.GetCount() == 0)
-                item.gameObject.SetActive(false);
+            if(Mathf.Round(item.GetValue()) == 0)
+            {
+                StartCoroutine(SetZero(item));
+            }
         }
+    }
+
+    private IEnumerator SetZero(StackUIView item)
+    {
+        yield return new WaitForSeconds(item.GetTweenerSpeed());
+        item.gameObject.SetActive(false);
     }
 }

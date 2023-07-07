@@ -86,8 +86,8 @@ public class StackMover : MonoBehaviour
         {
             if (item.Product.ProductType == stack.Product.ProductType)
             {
-                item.DecreaseQuantity(value);
-                OnStackChanged?.Invoke(value);
+                int newValue = item.DecreaseQuantity(value);
+                OnStackChanged?.Invoke(newValue);
             }
         }
     }

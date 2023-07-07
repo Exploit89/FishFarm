@@ -1,6 +1,7 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class LoadingCircle : MonoBehaviour
 {
@@ -10,13 +11,14 @@ public class LoadingCircle : MonoBehaviour
     [SerializeField] private TMP_Text _label;
 
     private int _fillValue = 0;
+    private float _relativeFillValue = 0;
     private int _maxValue = 0;
+    private float _tweenerSpeed = 2f;
 
     private void Start()
     {
         _maxValue = _wallet.GetMaxValue();
-        _label.text = _fillValue.ToString() + "/" + _maxValue.ToString();
-        _image.fillAmount = _fillValue;
+        UpdateFillValue(_fillValue);
     }
 
     private void OnEnable()
@@ -31,8 +33,25 @@ public class LoadingCircle : MonoBehaviour
 
     private void UpdateFillValue(int value)
     {
-        float currentValue = value / (float)_maxValue;
-        _image.fillAmount = currentValue;
-        _label.text = value.ToString() + "/" + _maxValue.ToString();
+        if(value != 0)
+        {
+            DOTween.To(ShowLabel, _fillValue, value, _tweenerSpeed);
+            _relativeFillValue = value / (float)_maxValue;
+            _image.DOFillAmount(_relativeFillValue, _tweenerSpeed);
+            _fillValue = value;
+        }
+        else
+        {
+            ShowLabel(_fillValue);
+            _image.fillAmount = _fillValue;
+        }
+    }
+
+    private void ShowLabel(float value)
+    {
+        if (_maxValue != 0)
+            _label.text = Mathf.Round(value) + "/" + _maxValue.ToString();
+        else
+            _label.text = "";
     }
 }

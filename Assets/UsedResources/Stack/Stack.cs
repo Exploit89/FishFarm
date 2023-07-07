@@ -18,12 +18,19 @@ public class Stack : MonoBehaviour
             Quantity = _maxQuantity;
     }
 
-    public void DecreaseQuantity(int value)
+    public int DecreaseQuantity(int value)
     {
         if (Quantity - value >= _minQuantity)
+        {
             Quantity -= value;
+        }
         else
+        {
+            value = Quantity;
             Quantity = 0;
+            return value;
+        }
+        return value;
     }
 
     public void Initialize(Product product, int quantity, Sprite icon)
