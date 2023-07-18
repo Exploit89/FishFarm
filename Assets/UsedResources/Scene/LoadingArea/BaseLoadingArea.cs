@@ -1,10 +1,10 @@
 using UnityEngine;
 
-public class LoadingArea : MonoBehaviour
+public class BaseLoadingArea : MonoBehaviour
 {
     private void Awake()
     {
-        GetComponent<Wallet>().SetMaxCash(1000);
+        GetComponent<Wallet>().SetMaxCash(0);
         GetComponent<ITaker>().SetTakeable(true);
     }
 }

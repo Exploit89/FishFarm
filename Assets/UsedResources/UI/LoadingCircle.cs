@@ -2,6 +2,9 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using UnityEngine.Events;
+using DG.Tweening.Core;
+using DG.Tweening.Plugins.Options;
 
 public class LoadingCircle : MonoBehaviour
 {
@@ -13,7 +16,10 @@ public class LoadingCircle : MonoBehaviour
     private int _fillValue = 0;
     private float _relativeFillValue = 0;
     private int _maxValue = 0;
-    private float _tweenerSpeed = 2f;
+
+    public float TweenerSpeed { get; private set; } = 2f;
+
+    public event UnityAction<TweenerCore<float, float, FloatOptions>> TweenStarted;
 
     private void Start()
     {
@@ -35,9 +41,10 @@ public class LoadingCircle : MonoBehaviour
     {
         if(value != 0)
         {
-            DOTween.To(ShowLabel, _fillValue, value, _tweenerSpeed);
+            DOTween.To(ShowLabel, _fillValue, value, TweenerSpeed);
             _relativeFillValue = value / (float)_maxValue;
-            _image.DOFillAmount(_relativeFillValue, _tweenerSpeed);
+            var tween = _image.DOFillAmount(_relativeFillValue, TweenerSpeed);
+            TweenStarted?.Invoke(tween);
             _fillValue = value;
         }
         else
@@ -53,5 +60,10 @@ public class LoadingCircle : MonoBehaviour
             _label.text = Mathf.Round(value) + "/" + _maxValue.ToString();
         else
             _label.text = "";
+    }
+
+    public float GetFillAmount()
+    {
+        return _image.fillAmount;
     }
 }
