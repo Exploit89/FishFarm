@@ -56,6 +56,7 @@ public class StackUIPanel : MonoBehaviour
         {
             if(Mathf.Round(item.GetValue()) == 0)
             {
+                Debug.Log(item.GetValue());
                 StartCoroutine(SetZero(item));
             }
         }
