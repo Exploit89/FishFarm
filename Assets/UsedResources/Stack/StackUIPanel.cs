@@ -25,6 +25,7 @@ public class StackUIPanel : MonoBehaviour
     private void AddItem(Stack stack)
     {
         StackUIView view = Instantiate(_template, _itemContainer.transform);
+        view.name = stack.name;
         view.Render(stack);
         _stackViews.Add(view);
     }
@@ -45,6 +46,7 @@ public class StackUIPanel : MonoBehaviour
         foreach (var item in _itemContainer.GetComponentsInChildren<StackUIView>(true))
         {
             item.gameObject.SetActive(true);
+            StopCoroutine(SetZero(item));
         }
 
         for (int i = 0; i < _stackMover.GetStacks().Count; i++)
@@ -52,11 +54,10 @@ public class StackUIPanel : MonoBehaviour
             _itemContainer.GetComponentsInChildren<StackUIView>()[i].Render(_stackMover.GetStacks()[i]);
         }
 
-        foreach (var item in _itemContainer.GetComponentsInChildren<StackUIView>())
+        foreach (var item in _itemContainer.GetComponentsInChildren<StackUIView>(true))
         {
-            if(Mathf.Round(item.GetValue()) == 0)
+            if (Mathf.Round(item.GetValue()) == 0 && Mathf.Round(item.GetLastValue()) != 0)
             {
-                Debug.Log(item.GetValue());
                 StartCoroutine(SetZero(item));
             }
         }

@@ -111,13 +111,13 @@ public class StackMover : MonoBehaviour
 
                     if (value <= freeSpace)
                     {
-                        OnStackChanged?.Invoke(value);
                         item.IncreaseQuantity(value);
+                        OnStackChanged?.Invoke(value);
                     }
                     else
                     {
-                        OnStackChanged?.Invoke(freeSpace);
                         item.IncreaseQuantity(freeSpace);
+                        OnStackChanged?.Invoke(freeSpace);
                     }
                 }
             }

@@ -10,6 +10,7 @@ public class StackUIView : MonoBehaviour
     [SerializeField] private Image _icon;
 
     private Stack _stack;
+    private int _lastValue;
     private int _value;
     private float _tweenerSpeed = 1f;
 
@@ -26,6 +27,7 @@ public class StackUIView : MonoBehaviour
 
         if (int.TryParse(_count.text, System.Globalization.NumberStyles.Integer, null, out int value))
             _value = value;
+        _lastValue = value;
         DOTween.To(ShowLabel, _value, _stack.Quantity, _tweenerSpeed);
         _value = _stack.Quantity;
         _count.text = _stack.Quantity.ToString();
@@ -39,5 +41,10 @@ public class StackUIView : MonoBehaviour
     public float GetTweenerSpeed()
     {
         return _tweenerSpeed;
+    }
+
+    public int GetLastValue()
+    {
+        return _lastValue;
     }
 }

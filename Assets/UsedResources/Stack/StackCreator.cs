@@ -19,12 +19,6 @@ public class StackCreator : MonoBehaviour
         {
             Stack stack = Instantiate(_stackPrefab, transform);
             stack.transform.position += _prefabPosition;
-
-            if (stack.TryGetComponent(out StackView stackView))
-            {
-                if(TryGetComponent(out StackExchanger stackExchanger))
-                    stackView.SetStackExchanger(stackExchanger);
-            }
             stack.Initialize(new Product(), _startQuantity, _stackImages.GetSprite(productType));
             stack.Product.SetProductType(productType);
             stack.name = stack.Product.Name;
