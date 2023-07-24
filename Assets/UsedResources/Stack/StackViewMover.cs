@@ -6,7 +6,6 @@ using UnityEngine;
 public class StackViewMover : MonoBehaviour
 {
     private List<StackView> _stackViews;
-    private StackMover _otherStackMover;
     private float _tweenerSpeed = 1f;
 
     private void Start()
@@ -31,13 +30,6 @@ public class StackViewMover : MonoBehaviour
         {
             stackMover.OnNamedStackChanged -= Move;
         }
-    }
-
-    private void OnTriggerEnter(Collider collider)
-    {
-        if (collider.TryGetComponent(out StackMover stackMover))
-            _otherStackMover = stackMover;
-        Debug.Log("otherStackMover is " + _otherStackMover.gameObject.name);
     }
 
     private void ShowAll()
