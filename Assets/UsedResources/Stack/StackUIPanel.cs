@@ -56,7 +56,11 @@ public class StackUIPanel : MonoBehaviour
 
         foreach (var item in _itemContainer.GetComponentsInChildren<StackUIView>(true))
         {
-            if (Mathf.Round(item.GetValue()) == 0 && Mathf.Round(item.GetLastValue()) != 0)
+            if (Mathf.Round(item.GetValue()) == 0)
+            {
+                StartCoroutine(SetZero(item));
+            }
+            else if (Mathf.Round(item.GetLastValue()) == 0 && !item.IsChanged())
             {
                 StartCoroutine(SetZero(item));
             }

@@ -1,7 +1,6 @@
 using UnityEngine;
 using TMPro;
 using DG.Tweening;
-using Newtonsoft.Json.Linq;
 
 public class WalletView : MonoBehaviour
 {

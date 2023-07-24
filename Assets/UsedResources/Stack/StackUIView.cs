@@ -13,6 +13,7 @@ public class StackUIView : MonoBehaviour
     private int _lastValue;
     private int _value;
     private float _tweenerSpeed = 1f;
+    private bool _isChanged = false;
 
     private void ShowLabel(float value)
     {
@@ -29,6 +30,10 @@ public class StackUIView : MonoBehaviour
             _value = value;
         _lastValue = value;
         DOTween.To(ShowLabel, _value, _stack.Quantity, _tweenerSpeed);
+
+        if (_value == _stack.Quantity)
+            _isChanged = false;
+        else _isChanged = true;
         _value = _stack.Quantity;
         _count.text = _stack.Quantity.ToString();
     }
@@ -46,5 +51,10 @@ public class StackUIView : MonoBehaviour
     public int GetLastValue()
     {
         return _lastValue;
+    }
+
+    public bool IsChanged()
+    {
+        return _isChanged;
     }
 }
