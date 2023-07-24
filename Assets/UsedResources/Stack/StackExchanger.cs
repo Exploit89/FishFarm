@@ -35,14 +35,12 @@ public class StackExchanger : MonoBehaviour
         {
             StackMover otherStackMover = collider.GetComponent<StackMover>();
             TryGive(otherStackMover);
-           // UpdateStackCount?.Invoke();
         }
 
         if(collider.TryGetComponent(out IGiver iGiver) && !_isGiven)
         {
             StackMover otherStackMover = collider.GetComponent<StackMover>();
             TryTake(otherStackMover);
-            //UpdateStackCount?.Invoke();
         }
         UpdateStackCount?.Invoke();
     }

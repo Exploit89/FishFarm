@@ -12,6 +12,7 @@ public class StackMover : MonoBehaviour
     private StackCreator _stackCreator;
 
     public event UnityAction<int> OnStackChanged;
+    public event UnityAction<Stack, int, Transform> OnNamedStackChanged;
 
     private void Awake()
     {
@@ -69,11 +70,13 @@ public class StackMover : MonoBehaviour
                 if (stack.Quantity <= freeSpace)
                 {
                     OnStackChanged?.Invoke(stack.Quantity);
+                    OnNamedStackChanged?.Invoke(stack, stack.Quantity, gameObject.transform);
                     item.IncreaseQuantity(stack.Quantity);
                 }
                 else
                 {
                     OnStackChanged?.Invoke(freeSpace);
+                    OnNamedStackChanged?.Invoke(stack, freeSpace, gameObject.transform);
                     item.IncreaseQuantity(freeSpace);
                 }
             }
@@ -88,6 +91,7 @@ public class StackMover : MonoBehaviour
             {
                 int newValue = item.DecreaseQuantity(value);
                 OnStackChanged?.Invoke(newValue);
+                OnNamedStackChanged?.Invoke(stack, newValue, gameObject.transform);
             }
         }
     }
@@ -113,11 +117,13 @@ public class StackMover : MonoBehaviour
                     {
                         item.IncreaseQuantity(value);
                         OnStackChanged?.Invoke(value);
+                        OnNamedStackChanged?.Invoke(item, value, gameObject.transform);
                     }
                     else
                     {
                         item.IncreaseQuantity(freeSpace);
                         OnStackChanged?.Invoke(freeSpace);
+                        OnNamedStackChanged?.Invoke(item, freeSpace, gameObject.transform);
                     }
                 }
             }
