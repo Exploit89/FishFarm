@@ -20,18 +20,6 @@ public class StackUIView : MonoBehaviour
         _count.text = Mathf.Round(value).ToString();
     }
 
-    private void RenderStackView(Stack stack)
-    {
-        Transform stackItemTransform = transform;
-
-        for (int i = 0; i < stack.Quantity; i++)
-        {
-            var stackItem = Instantiate(stack, stackItemTransform);
-            stackItem.transform.position += new Vector3(2, 2, 0);
-            stackItemTransform = stackItem.transform;
-        }
-    }
-
     public void Render(Stack stack)
     {
         _stack = stack;
@@ -42,7 +30,6 @@ public class StackUIView : MonoBehaviour
             _value = value;
         _lastValue = value;
         DOTween.To(ShowLabel, _value, _stack.Quantity, _tweenerSpeed);
-        RenderStackView(stack);
 
         if (_value == _stack.Quantity)
             _isChanged = false;

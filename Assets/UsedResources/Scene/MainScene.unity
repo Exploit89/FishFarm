@@ -1339,8 +1339,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _stackMover: {fileID: 840123774}
   _stackExchanger: {fileID: 840123778}
-  _template: {fileID: 8199796922407482598, guid: a555f9e1a1ce7e847afd0070fa59e7e0, type: 3}
-  _itemContainer: {fileID: 1136975332}
+  _stackUIView: {fileID: 8199796922407482598, guid: a555f9e1a1ce7e847afd0070fa59e7e0, type: 3}
+  _itemContainer: {fileID: 531822487265103220, guid: 046fddd2c1c1644419773423598026d8, type: 3}
 --- !u!114 &502533535
 MonoBehaviour:
   m_ObjectHideFlags: 0
