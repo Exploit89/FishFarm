@@ -6,7 +6,7 @@ public class StackUIPanel : MonoBehaviour
 {
     [SerializeField] private StackMover _stackMover;
     [SerializeField] private StackExchanger _stackExchanger;
-    [SerializeField] private StackUIView _template;
+    [SerializeField] private StackUIView _stackUIView;
     [SerializeField] private GameObject _itemContainer;
 
     private List<StackUIView> _stackViews;
@@ -24,10 +24,10 @@ public class StackUIPanel : MonoBehaviour
 
     private void AddItem(Stack stack)
     {
-        StackUIView view = Instantiate(_template, _itemContainer.transform);
-        view.name = stack.name;
-        view.Render(stack);
-        _stackViews.Add(view);
+        StackUIView stackUIView = Instantiate(_stackUIView, _itemContainer.transform);
+        stackUIView.name = stack.name;
+        stackUIView.Render(stack);
+        _stackViews.Add(stackUIView);
     }
 
     public void CreateUIStackView()

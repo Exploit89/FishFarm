@@ -10,8 +10,8 @@ public class StackView : MonoBehaviour
 
     private void Start()
     {
-        _image = GetComponent<Stack>().Icon;
-        _spriteRenderer = GetComponent<SpriteRenderer>();
-        _spriteRenderer.sprite = _image;
+        //_image = GetComponent<Stack>().Icon;
+        //_spriteRenderer = GetComponent<SpriteRenderer>();
+        //_spriteRenderer.sprite = _image;
     }
 }
