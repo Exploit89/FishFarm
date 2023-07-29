@@ -6,12 +6,11 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] private StackUIPanel _StackUIPanel;
+    [SerializeField] private AAAStackUIPanel _StackUIPanel;
 
     private Wallet _wallet;
-    private Bag _bag;
     private StackMover _stackMover;
-    private int _startStackValue = 5; // test
+    private int _startStackValue = 0; // test
 
     private void Awake()
     {
@@ -21,7 +20,6 @@ public class Player : MonoBehaviour
     private void Start()
     {
         _wallet.GetStartMoney();
-        _bag = GetComponent<Bag>();
         _stackMover = GetComponent<StackMover>();
         _stackMover.CreateStacks(_startStackValue);
         _StackUIPanel.CreateUIStackView();

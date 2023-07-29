@@ -19,7 +19,6 @@ public class StackView : MonoBehaviour
         _image = GetComponent<Stack>().Icon;
         SetStackOffsetX();
         CreateStackViews();
-        //Render();
     }
 
     private void OnEnable()
@@ -29,7 +28,8 @@ public class StackView : MonoBehaviour
 
     private void OnDisable()
     {
-        GetComponentInParent<StackMover>().OnStackChanged -= Render;
+        if(GetComponentInParent<StackMover>() != null)
+            GetComponentInParent<StackMover>().OnStackChanged -= Render;
     }
 
     private void CreateStackViews()

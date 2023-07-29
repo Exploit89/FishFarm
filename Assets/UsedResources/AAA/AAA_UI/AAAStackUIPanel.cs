@@ -2,31 +2,31 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StackUIPanel : MonoBehaviour
+public class AAAStackUIPanel : MonoBehaviour
 {
-    [SerializeField] private StackMover _stackMover;
-    [SerializeField] private StackExchanger _stackExchanger;
+    [SerializeField] private AAA_Giver _stackGiver;
+    [SerializeField] private AAAStackMover _stackMover;
     [SerializeField] private StackUIView _stackUIView;
     [SerializeField] private GameObject _itemContainer;
 
     private List<StackUIView> _stackViews;
-    private List<Stack> _playerStacks;
+    private List<AAAStack> _playerStacks;
 
     private void OnEnable()
     {
-        _stackExchanger.UpdateStackCount += UpdateUIStackView;
+        _stackGiver.StackGiven += UpdateUIStackView;
     }
 
     private void OnDisable()
     {
-        _stackExchanger.UpdateStackCount -= UpdateUIStackView;
+        _stackGiver.StackGiven -= UpdateUIStackView;
     }
 
-    private void AddItem(Stack stack)
+    private void AddItem(AAAStack stack)
     {
         StackUIView stackUIView = Instantiate(_stackUIView, _itemContainer.transform);
         stackUIView.name = stack.name;
-        //stackUIView.Render(stack);
+        stackUIView.Render(stack);
         _stackViews.Add(stackUIView);
     }
 
@@ -41,7 +41,7 @@ public class StackUIPanel : MonoBehaviour
         }
     }
 
-    private void UpdateUIStackView()
+    private void UpdateUIStackView(AAAStack taker = null, AAAStack giver = null, int value = 0)
     {
         foreach (var item in _itemContainer.GetComponentsInChildren<StackUIView>(true))
         {
@@ -51,7 +51,7 @@ public class StackUIPanel : MonoBehaviour
 
         for (int i = 0; i < _stackMover.GetStacks().Count; i++)
         {
-            //_itemContainer.GetComponentsInChildren<StackUIView>()[i].Render(_stackMover.GetStacks()[i]);
+            _itemContainer.GetComponentsInChildren<StackUIView>()[i].Render(_stackMover.GetStacks()[i]);
         }
 
         foreach (var item in _itemContainer.GetComponentsInChildren<StackUIView>(true))

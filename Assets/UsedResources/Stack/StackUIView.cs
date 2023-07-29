@@ -9,7 +9,7 @@ public class StackUIView : MonoBehaviour
     [SerializeField] private TMP_Text _count;
     [SerializeField] private Image _icon;
 
-    private Stack _stack;
+    private AAAStack _stack;
     private int _lastValue;
     private int _value;
     private float _tweenerSpeed = 1f;
@@ -20,11 +20,11 @@ public class StackUIView : MonoBehaviour
         _count.text = Mathf.Round(value).ToString();
     }
 
-    public void Render(Stack stack)
+    public void Render(AAAStack stack)
     {
         _stack = stack;
         _label.text = _stack.Label;
-        _icon.sprite = _stack.Icon;
+        _icon.sprite = _stack.Image;
 
         if (int.TryParse(_count.text, System.Globalization.NumberStyles.Integer, null, out int value))
             _value = value;
