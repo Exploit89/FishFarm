@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] private AAAStackUIPanel _StackUIPanel;
+    [SerializeField] private AAAStackUIPanel _stackUIPanel;
 
     private Wallet _wallet;
     private StackMover _stackMover;
@@ -22,6 +22,6 @@ public class Player : MonoBehaviour
         _wallet.GetStartMoney();
         _stackMover = GetComponent<StackMover>();
         _stackMover.CreateStacks(_startStackValue);
-        _StackUIPanel.CreateUIStackView();
+        _stackUIPanel.CreateUIStackView();
     }
 }

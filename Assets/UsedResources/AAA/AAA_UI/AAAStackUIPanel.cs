@@ -33,6 +33,7 @@ public class AAAStackUIPanel : MonoBehaviour
     public void CreateUIStackView()
     {
         _stackViews = new List<StackUIView>();
+        _playerStacks = new List<AAAStack>();
         _playerStacks = _stackMover.GetStacks();
 
         for (int i = 0; i < _playerStacks.Count; i++)

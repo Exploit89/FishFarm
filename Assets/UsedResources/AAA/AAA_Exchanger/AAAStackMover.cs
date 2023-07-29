@@ -8,7 +8,7 @@ public class AAAStackMover : MonoBehaviour
 
     private List<AAAStack> _stacks;
 
-    private void Start()
+    private void Awake()
     {
         _stacks = new List<AAAStack>();
 
