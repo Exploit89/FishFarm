@@ -37,6 +37,7 @@ public class AAA_Giver : MonoBehaviour
                     takerCurrentStack.IncreaseQuantity(oldValue);
                     giverCurrentStack.DecreaseQuantity(oldValue);
                     StackGiven?.Invoke(takerCurrentStack, giverCurrentStack, oldValue);
+                    Debug.Log("stack given " + oldValue);
                 }
             }
         }

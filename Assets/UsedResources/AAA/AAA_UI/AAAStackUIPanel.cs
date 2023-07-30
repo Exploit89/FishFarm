@@ -53,6 +53,7 @@ public class AAAStackUIPanel : MonoBehaviour
         for (int i = 0; i < _stackMover.GetStacks().Count; i++)
         {
             _itemContainer.GetComponentsInChildren<StackUIView>()[i].Render(_stackMover.GetStacks()[i]);
+            Debug.Log("stack rendered " + _stackMover.GetStacks()[i]);
         }
 
         foreach (var item in _itemContainer.GetComponentsInChildren<StackUIView>(true))
