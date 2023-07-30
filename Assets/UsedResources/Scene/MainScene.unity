@@ -4283,7 +4283,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _stackPrefabs:
   - {fileID: -404223485363099703, guid: 457e02bb9a79a214897a781c32417695, type: 3}
-  _startStacksCount: 0
+  _startStacksCount: 5
 --- !u!1 &1084712550
 GameObject:
   m_ObjectHideFlags: 0
@@ -6305,6 +6305,7 @@ GameObject:
   - component: {fileID: 1931948861}
   - component: {fileID: 1931948871}
   - component: {fileID: 1931948872}
+  - component: {fileID: 1931948873}
   m_Layer: 0
   m_Name: PoolStorage
   m_TagString: Untagged
@@ -6497,6 +6498,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _stacks:
   - {fileID: -404223485363099703, guid: 457e02bb9a79a214897a781c32417695, type: 3}
+  _giverStackMover: {fileID: 1061407459}
+--- !u!114 &1931948873
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1931948859}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47389157f0bc69a4881da4433b25ea2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _fishEvents: {fileID: 1450802562}
   _giverStackMover: {fileID: 1061407459}
 --- !u!1 &1945407287
 GameObject:
