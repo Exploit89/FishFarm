@@ -4,22 +4,22 @@ using UnityEngine;
 
 public class AAAStackUIPanel : MonoBehaviour
 {
-    [SerializeField] private AAA_Giver _stackGiver;
     [SerializeField] private AAAStackMover _stackMover;
     [SerializeField] private StackUIView _stackUIView;
     [SerializeField] private GameObject _itemContainer;
+    [SerializeField] private AAAPlayerEvents _playerEvents;
 
     private List<StackUIView> _stackViews;
     private List<AAAStack> _playerStacks;
 
     private void OnEnable()
     {
-        _stackGiver.StackGiven += UpdateUIStackView;
+        _playerEvents.StackChanged += UpdateUIStackView;
     }
 
     private void OnDisable()
     {
-        _stackGiver.StackGiven -= UpdateUIStackView;
+        _playerEvents.StackChanged -= UpdateUIStackView;
     }
 
     private void AddItem(AAAStack stack)
@@ -53,7 +53,6 @@ public class AAAStackUIPanel : MonoBehaviour
         for (int i = 0; i < _stackMover.GetStacks().Count; i++)
         {
             _itemContainer.GetComponentsInChildren<StackUIView>()[i].Render(_stackMover.GetStacks()[i]);
-            Debug.Log("stack rendered " + _stackMover.GetStacks()[i]);
         }
 
         foreach (var item in _itemContainer.GetComponentsInChildren<StackUIView>(true))

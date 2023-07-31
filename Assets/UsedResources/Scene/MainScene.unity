@@ -1375,10 +1375,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c69988e6e35a01845b495998f290ae1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _stackGiver: {fileID: 840123786}
   _stackMover: {fileID: 840123787}
   _stackUIView: {fileID: 8199796922407482598, guid: a555f9e1a1ce7e847afd0070fa59e7e0, type: 3}
   _itemContainer: {fileID: 1136975332}
+  _playerEvents: {fileID: 840123788}
 --- !u!1 &613408125
 GameObject:
   m_ObjectHideFlags: 0
@@ -3084,7 +3084,7 @@ MonoBehaviour:
   _stackPrefabs:
   - {fileID: -404223485363099703, guid: 85b00ce0f0baa5644a5c06ead163255b, type: 3}
   - {fileID: -404223485363099703, guid: 457e02bb9a79a214897a781c32417695, type: 3}
-  _startStacksCount: 0
+  _startStacksCount: 3
 --- !u!1 &840123766
 GameObject:
   m_ObjectHideFlags: 0
@@ -3107,9 +3107,8 @@ GameObject:
   - component: {fileID: 840123782}
   - component: {fileID: 840123783}
   - component: {fileID: 840123784}
-  - component: {fileID: 840123786}
-  - component: {fileID: 840123785}
   - component: {fileID: 840123787}
+  - component: {fileID: 840123788}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -3329,42 +3328,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e204f5a5bba36b54b9c7c5df78fefd2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &840123785
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 840123766}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cd93244dcea248e418753f9e665b3abf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _stacks:
-  - {fileID: -404223485363099703, guid: 2e3313a6851e47445965be95b09c20b7, type: 3}
-  - {fileID: -404223485363099703, guid: 85b00ce0f0baa5644a5c06ead163255b, type: 3}
-  - {fileID: -404223485363099703, guid: 457e02bb9a79a214897a781c32417695, type: 3}
-  - {fileID: -404223485363099703, guid: b2b6903a330e76047812c0551de10750, type: 3}
-  _stackMover: {fileID: 840123787}
---- !u!114 &840123786
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 840123766}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ee0807841b2482040abaf17f28b45aaf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _stacks:
-  - {fileID: -404223485363099703, guid: 2e3313a6851e47445965be95b09c20b7, type: 3}
-  - {fileID: -404223485363099703, guid: 85b00ce0f0baa5644a5c06ead163255b, type: 3}
-  - {fileID: -404223485363099703, guid: 457e02bb9a79a214897a781c32417695, type: 3}
-  - {fileID: -404223485363099703, guid: b2b6903a330e76047812c0551de10750, type: 3}
-  _giverStackMover: {fileID: 840123787}
 --- !u!114 &840123787
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3383,6 +3346,18 @@ MonoBehaviour:
   - {fileID: -404223485363099703, guid: 457e02bb9a79a214897a781c32417695, type: 3}
   - {fileID: -404223485363099703, guid: b2b6903a330e76047812c0551de10750, type: 3}
   _startStacksCount: 5
+--- !u!114 &840123788
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 840123766}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25254da2ae8e42b4c8e769798d614891, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &855221761
 GameObject:
   m_ObjectHideFlags: 0
@@ -4920,6 +4895,7 @@ MonoBehaviour:
   _stacks:
   - {fileID: -404223485363099703, guid: 85b00ce0f0baa5644a5c06ead163255b, type: 3}
   _giverStackMover: {fileID: 837141915}
+  _playerEvents: {fileID: 840123788}
 --- !u!65 &1223156193
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5213,7 +5189,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _stacks:
   - {fileID: -404223485363099703, guid: 457e02bb9a79a214897a781c32417695, type: 3}
-  _stackMover: {fileID: 837141915}
+  _takerStackMover: {fileID: 837141915}
+  _playerEvents: {fileID: 840123788}
 --- !u!23 &1435442536
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -6499,6 +6476,7 @@ MonoBehaviour:
   _stacks:
   - {fileID: -404223485363099703, guid: 457e02bb9a79a214897a781c32417695, type: 3}
   _giverStackMover: {fileID: 1061407459}
+  _playerEvents: {fileID: 840123788}
 --- !u!114 &1931948873
 MonoBehaviour:
   m_ObjectHideFlags: 0
