@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class AAA_Taker : MonoBehaviour
 {
@@ -8,6 +9,8 @@ public class AAA_Taker : MonoBehaviour
     [SerializeField] private AAAPlayerEvents _playerEvents;
 
     private AAAStackMover _giverStackMover;
+
+    public event UnityAction StackTaken;
 
     private void OnTriggerEnter(Collider collider)
     {
