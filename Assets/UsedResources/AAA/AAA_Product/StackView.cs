@@ -27,15 +27,27 @@ public class StackView : MonoBehaviour
             StartCoroutine(CreateStackView(taker, giver, value));
     }
 
-    private IEnumerator SwitchOff(GameObject stackView)
+    private IEnumerator SwitchOff(GameObject stackView, float stackQuantity)
     {
         yield return new WaitForSeconds(_movingDuration);
-        stackView.gameObject.SetActive(false);
+
+        if (stackView.GetComponentInParent<Player>())
+        {
+            stackView.transform.position = gameObject.GetComponentInParent<Transform>().transform.position; //
+            Vector3 stackPosition = new Vector3(0, stackQuantity, 0);
+            stackView.transform.position += stackPosition;
+        }
+        else
+        {
+            stackView.gameObject.SetActive(false);
+        }
+
     }
 
     private IEnumerator CreateStackView(Stack taker, Stack giver, int value)
     {
         Transform parentTransform = taker.GetComponentInParent<Transform>();
+        float stackQuantity = 0;
 
         for (int i = 0; i < value; i++)
         {
@@ -43,10 +55,11 @@ public class StackView : MonoBehaviour
             stackView.GetComponent<SpriteRenderer>().sprite = giver.Image;
             stackView.transform.position = giver.transform.position;
             stackView.transform.DOMove(taker.transform.position, _movingDuration);
-
-            if (taker.GetComponentInParent<Transform>().gameObject.TryGetComponent(out Player player))
-                StartCoroutine(SwitchOff(stackView));
+            stackQuantity += 0.5f;
+            StartCoroutine(SwitchOff(stackView, stackQuantity));
             yield return new WaitForSeconds(_delay);
         }
+
+        stackQuantity = 0;
     }
 }
