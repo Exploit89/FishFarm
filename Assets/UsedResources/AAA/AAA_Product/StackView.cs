@@ -2,9 +2,9 @@ using DG.Tweening;
 using System.Collections;
 using UnityEngine;
 
-public class AAAStackView : MonoBehaviour
+public class StackView : MonoBehaviour
 {
-    [SerializeField] private AAAPlayerEvents _playerEvents;
+    [SerializeField] private PlayerEvents _playerEvents;
     [SerializeField] private GameObject _stackPrefab;
 
     private float _movingDuration = 0.5f;
@@ -21,7 +21,7 @@ public class AAAStackView : MonoBehaviour
         _playerEvents.StackChanged -= UpdateStackView;
     }
 
-    private void UpdateStackView(AAAStack taker, AAAStack giver, int value)
+    private void UpdateStackView(Stack taker, Stack giver, int value)
     {
         if (value > 0)
             StartCoroutine(CreateStackView(taker, giver, value));
@@ -33,7 +33,7 @@ public class AAAStackView : MonoBehaviour
         stackView.gameObject.SetActive(false);
     }
 
-    private IEnumerator CreateStackView(AAAStack taker, AAAStack giver, int value)
+    private IEnumerator CreateStackView(Stack taker, Stack giver, int value)
     {
         Transform parentTransform = taker.GetComponentInParent<Transform>();
 

@@ -2,26 +2,26 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class AAA_Giver : MonoBehaviour
+public class ProductTaker : MonoBehaviour
 {
-    [SerializeField] private List<AAAStack> _stacks;
-    [SerializeField] private AAAStackMover _giverStackMover;
-    [SerializeField] private AAAPlayerEvents _playerEvents;
+    [SerializeField] private List<Stack> _stacks;
+    [SerializeField] private StackMover _takerStackMover;
+    [SerializeField] private PlayerEvents _playerEvents;
 
-    private AAAStackMover _takerStackMover;
+    private StackMover _giverStackMover;
 
-    public event UnityAction StackGiven;
+    public event UnityAction StackTaken;
 
     private void OnTriggerEnter(Collider collider)
     {
-        if (collider.TryGetComponent(out AAAStackMover playerStackMover))
+        if (collider.TryGetComponent(out StackMover playerStackMover))
         {
-            _takerStackMover = playerStackMover;
-            TryGive(_takerStackMover);
+            _giverStackMover = playerStackMover;
+            TryTake(_giverStackMover);
         }
     }
 
-    private void TryGive(AAAStackMover playerStackMover)
+    private void TryTake(StackMover playerStackMover)
     {
         foreach (var giverStack in _stacks)
         {
@@ -29,8 +29,8 @@ public class AAA_Giver : MonoBehaviour
             {
                 if (giverStack.ProductType == takerStack.ProductType)
                 {
-                    AAAStack takerCurrentStack = _takerStackMover.GetStack(takerStack);
-                    AAAStack giverCurrentStack = _giverStackMover.GetStack(giverStack);
+                    Stack takerCurrentStack = _takerStackMover.GetStack(takerStack);
+                    Stack giverCurrentStack = _giverStackMover.GetStack(giverStack);
                     int oldValue = giverCurrentStack.Quantity;
                     takerCurrentStack.IncreaseQuantity(oldValue);
                     giverCurrentStack.DecreaseQuantity(oldValue);
@@ -40,9 +40,9 @@ public class AAA_Giver : MonoBehaviour
         }
     }
 
-    public List<AAAStack> GetStacks()
+    public List<Stack> GetStacks()
     {
-        List<AAAStack> stacks = new List<AAAStack>();
+        List<Stack> stacks = new List<Stack>();
         stacks = _stacks;
         return stacks;
     }

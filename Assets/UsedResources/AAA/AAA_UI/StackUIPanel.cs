@@ -2,15 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AAAStackUIPanel : MonoBehaviour
+public class StackUIPanel : MonoBehaviour
 {
-    [SerializeField] private AAAStackMover _stackMover;
+    [SerializeField] private StackMover _stackMover;
     [SerializeField] private StackUIView _stackUIView;
     [SerializeField] private GameObject _itemContainer;
-    [SerializeField] private AAAPlayerEvents _playerEvents;
+    [SerializeField] private PlayerEvents _playerEvents;
 
     private List<StackUIView> _stackViews;
-    private List<AAAStack> _playerStacks;
+    private List<Stack> _playerStacks;
 
     private void OnEnable()
     {
@@ -22,7 +22,7 @@ public class AAAStackUIPanel : MonoBehaviour
         _playerEvents.StackChanged -= UpdateUIStackView;
     }
 
-    private void AddItem(AAAStack stack)
+    private void AddItem(Stack stack)
     {
         StackUIView stackUIView = Instantiate(_stackUIView, _itemContainer.transform);
         stackUIView.name = stack.name;
@@ -33,7 +33,7 @@ public class AAAStackUIPanel : MonoBehaviour
     public void CreateUIStackView()
     {
         _stackViews = new List<StackUIView>();
-        _playerStacks = new List<AAAStack>();
+        _playerStacks = new List<Stack>();
         _playerStacks = _stackMover.GetStacks();
 
         for (int i = 0; i < _playerStacks.Count; i++)
@@ -42,7 +42,7 @@ public class AAAStackUIPanel : MonoBehaviour
         }
     }
 
-    private void UpdateUIStackView(AAAStack taker = null, AAAStack giver = null, int value = 0)
+    private void UpdateUIStackView(Stack taker = null, Stack giver = null, int value = 0)
     {
         foreach (var item in _itemContainer.GetComponentsInChildren<StackUIView>(true))
         {

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class AAAStack : MonoBehaviour
+public class Stack : MonoBehaviour
 {
     [SerializeField] private ProductType _productType;
     [SerializeField] private Sprite _image;

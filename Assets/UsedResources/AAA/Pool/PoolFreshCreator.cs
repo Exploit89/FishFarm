@@ -1,9 +1,9 @@
 using UnityEngine;
 
-public class AAA_PoolFreshCreator : MonoBehaviour
+public class PoolFreshCreator : MonoBehaviour
 {
     [SerializeField] private FishEvents _fishEvents;
-    [SerializeField] private AAAStackMover _giverStackMover;
+    [SerializeField] private StackMover _giverStackMover;
 
     private void OnEnable()
     {

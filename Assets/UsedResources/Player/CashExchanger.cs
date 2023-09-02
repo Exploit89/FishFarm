@@ -26,13 +26,13 @@ public class CashExchanger : MonoBehaviour
 
     private void OnTriggerEnter(Collider collider)
     {
-        if (collider.TryGetComponent(out ITaker iTaker) && iTaker.CanTakeCash)
+        if (collider.TryGetComponent(out CashTaker iTaker) && iTaker.CanTakeCash)
         {
             Wallet otherWallet = collider.GetComponent<Wallet>();
             TryGive(otherWallet);
         }
 
-        if (collider.TryGetComponent(out IGiver iGiver) && iGiver.CanGiveCash)
+        if (collider.TryGetComponent(out CashGiver iGiver) && iGiver.CanGiveCash)
         {
             Wallet otherWallet = collider.GetComponent<Wallet>();
             TryTake(otherWallet);

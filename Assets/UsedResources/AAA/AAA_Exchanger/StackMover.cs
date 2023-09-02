@@ -1,16 +1,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AAAStackMover : MonoBehaviour
+public class StackMover : MonoBehaviour
 {
-    [SerializeField] private List<AAAStack> _stackPrefabs;
+    [SerializeField] private List<Stack> _stackPrefabs;
     [SerializeField] private int _startStacksCount;
 
-    private List<AAAStack> _stacks;
+    private List<Stack> _stacks;
 
     private void Awake()
     {
-        _stacks = new List<AAAStack>();
+        _stacks = new List<Stack>();
 
         foreach (var item in _stackPrefabs)
         {
@@ -20,7 +20,7 @@ public class AAAStackMover : MonoBehaviour
         }
     }
 
-    public AAAStack GetStack(AAAStack stack)
+    public Stack GetStack(Stack stack)
     {
         foreach (var item in _stacks)
         {
@@ -30,9 +30,9 @@ public class AAAStackMover : MonoBehaviour
         return null;
     }
 
-    public List<AAAStack> GetStacks()
+    public List<Stack> GetStacks()
     {
-        List<AAAStack> stacks = new List<AAAStack>();
+        List<Stack> stacks = new List<Stack>();
         stacks = _stacks;
         return stacks;
     }

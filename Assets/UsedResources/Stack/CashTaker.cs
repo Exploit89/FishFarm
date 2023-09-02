@@ -1,10 +1,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(StackMover))]
 [RequireComponent(typeof(Wallet))]
 
-public class ITaker : MonoBehaviour
+public class CashTaker : MonoBehaviour
 {
     [SerializeField] private List<ProductType> _productTypes;
 
