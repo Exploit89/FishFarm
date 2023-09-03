@@ -2641,7 +2641,7 @@ MonoBehaviour:
   - {fileID: 4411525620143043621, guid: 85b00ce0f0baa5644a5c06ead163255b, type: 3}
   - {fileID: 3375502646644160172, guid: 457e02bb9a79a214897a781c32417695, type: 3}
   - {fileID: 1695686961491508281, guid: b2b6903a330e76047812c0551de10750, type: 3}
-  _startStacksCount: 5
+  _startStacksCount: 0
 --- !u!114 &840123789
 MonoBehaviour:
   m_ObjectHideFlags: 0

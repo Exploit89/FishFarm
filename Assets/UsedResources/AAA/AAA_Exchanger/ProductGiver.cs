@@ -23,18 +23,21 @@ public class ProductGiver : MonoBehaviour
 
     private void TryGive(StackMover playerStackMover)
     {
-        foreach (var giverStack in _stacks)
+        if (_takerStackMover.CanTake())
         {
-            foreach (var takerStack in playerStackMover.GetStacks())
+            foreach (var giverStack in _stacks)
             {
-                if (giverStack.ProductType == takerStack.ProductType)
+                foreach (var takerStack in playerStackMover.GetStacks())
                 {
-                    Stack takerCurrentStack = _takerStackMover.GetStack(takerStack);
-                    Stack giverCurrentStack = _giverStackMover.GetStack(giverStack);
-                    int oldValue = giverCurrentStack.Quantity;
-                    takerCurrentStack.IncreaseQuantity(oldValue);
-                    giverCurrentStack.DecreaseQuantity(oldValue);
-                    _playerEvents.OnStackChanged(takerCurrentStack, giverCurrentStack, oldValue);
+                    if (giverStack.ProductType == takerStack.ProductType)
+                    {
+                        Stack takerCurrentStack = _takerStackMover.GetStack(takerStack);
+                        Stack giverCurrentStack = _giverStackMover.GetStack(giverStack);
+                        int oldValue = giverCurrentStack.Quantity;
+                        takerCurrentStack.IncreaseQuantity(oldValue);
+                        giverCurrentStack.DecreaseQuantity(oldValue);
+                        _playerEvents.OnStackChanged(takerCurrentStack, giverCurrentStack, oldValue);
+                    }
                 }
             }
         }

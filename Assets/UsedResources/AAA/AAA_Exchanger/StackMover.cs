@@ -36,4 +36,19 @@ public class StackMover : MonoBehaviour
         stacks = _stacks;
         return stacks;
     }
+
+    public bool CanTake()
+    {
+        int count = 0;
+
+        foreach (var stack in _stacks)
+        {
+            count += stack.Quantity;
+        }
+
+        if (count == 0)
+            return true;
+        else
+            return false;
+    }
 }
