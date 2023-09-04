@@ -1,6 +1,6 @@
 using DG.Tweening;
 using System.Collections;
-using System.Linq;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class StackView : MonoBehaviour
@@ -10,7 +10,6 @@ public class StackView : MonoBehaviour
 
     private float _movingDuration = 0.5f;
     private float _delay = 0.2f;
-
 
     private void OnEnable()
     {
@@ -27,7 +26,6 @@ public class StackView : MonoBehaviour
         if (value > 0)
         {
             StartCoroutine(CreateStackView(taker, giver, value));
-            ///////////////////////////////////////
             StartCoroutine(DestroyStackView(giver, value));
         }
     }
@@ -46,7 +44,6 @@ public class StackView : MonoBehaviour
         {
             stackView.gameObject.SetActive(false);
         }
-
     }
 
     private IEnumerator CreateStackView(Stack taker, Stack giver, int value)
@@ -72,18 +69,16 @@ public class StackView : MonoBehaviour
     {
         foreach (var item in giver.GetComponentsInChildren<Stack>())
         {
-            if (item.Quantity == 0)
+            for (int i = 0; i < item.GetComponentsInChildren<SpriteRenderer>().Length; i++)
             {
-                Debug.Log("clear capacity");
-            }
-            else
-            {
-                Debug.Log(item.GetComponentsInChildren<Transform>().Length);
-                for (int i = 1; i < item.GetComponentsInChildren<Transform>().Length; i++)
+                Debug.Log(item.GetComponentsInChildren<SpriteRenderer>().Length);
+                yield return new WaitForSeconds(_delay * value);
+
+                if (item.GetComponentsInChildren<SpriteRenderer>()[i].gameObject)
                 {
-                    Debug.Log(item.GetComponentsInChildren<Transform>()[i].name);
-                    Destroy(item.GetComponentsInChildren<Transform>()[i].gameObject);
-                    yield return new WaitForSeconds(_delay);
+                    //хуета ебаная ломает только 3 из 5
+                    Debug.Log(item.GetComponentsInChildren<SpriteRenderer>()[i].gameObject.name);
+                    Destroy(item.GetComponentsInChildren<SpriteRenderer>()[i].gameObject);
                 }
             }
         }
