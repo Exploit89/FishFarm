@@ -1,6 +1,5 @@
 using DG.Tweening;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class StackView : MonoBehaviour
@@ -64,22 +63,24 @@ public class StackView : MonoBehaviour
         stackQuantity = 0;
     }
 
-    //////////////////////////////////////////
     private IEnumerator DestroyStackView(Stack giver, int value)
     {
         foreach (var item in giver.GetComponentsInChildren<Stack>())
         {
-            for (int i = 0; i < item.GetComponentsInChildren<SpriteRenderer>().Length; i++)
-            {
-                Debug.Log(item.GetComponentsInChildren<SpriteRenderer>().Length);
-                yield return new WaitForSeconds(_delay * value);
+            int arrayLenght = item.GetComponentsInChildren<SpriteRenderer>().Length;
 
-                if (item.GetComponentsInChildren<SpriteRenderer>()[i].gameObject)
-                {
-                    //хуета ебаная ломает только 3 из 5
-                    Debug.Log(item.GetComponentsInChildren<SpriteRenderer>()[i].gameObject.name);
-                    Destroy(item.GetComponentsInChildren<SpriteRenderer>()[i].gameObject);
-                }
+            for (int i = arrayLenght; i > 0; i--)
+            {
+                yield return new WaitForSeconds(_delay);
+                item.GetComponentsInChildren<SpriteRenderer>()[i-1].gameObject.SetActive(false);
+            }
+        }
+
+        foreach(var item in giver.GetComponentsInChildren<Stack>())
+        {
+            foreach (var disabledObject in item.GetComponentsInChildren<SpriteRenderer>(true))
+            {
+                Destroy(disabledObject.gameObject);
             }
         }
     }
