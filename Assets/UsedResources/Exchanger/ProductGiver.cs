@@ -11,6 +11,7 @@ public class ProductGiver : MonoBehaviour
     private StackMover _takerStackMover;
 
     public event UnityAction StackGiven;
+    public event UnityAction<int> OnStackCleared;
 
     private void OnTriggerEnter(Collider collider)
     {
@@ -37,6 +38,7 @@ public class ProductGiver : MonoBehaviour
                         takerCurrentStack.IncreaseQuantity(oldValue);
                         giverCurrentStack.DecreaseQuantity(oldValue);
                         _playerEvents.OnStackChanged(takerCurrentStack, giverCurrentStack, oldValue);
+                        OnStackCleared?.Invoke(giverCurrentStack.Quantity);
                     }
                 }
             }

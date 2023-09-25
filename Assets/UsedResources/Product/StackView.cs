@@ -35,7 +35,7 @@ public class StackView : MonoBehaviour
 
         if (stackView.GetComponentInParent<Player>())
         {
-            stackView.transform.position = gameObject.GetComponentInParent<Transform>().transform.position; //
+            stackView.transform.position = gameObject.GetComponentInParent<Transform>().transform.position;
             Vector3 stackPosition = new Vector3(0, stackQuantity, 0);
             stackView.transform.position += stackPosition;
         }

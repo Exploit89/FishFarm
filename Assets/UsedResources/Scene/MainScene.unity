@@ -6124,6 +6124,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _fishEvents: {fileID: 1450802562}
   _giverStackMover: {fileID: 1061407459}
+  _giver: {fileID: 1931948872}
+  _stackPrefab: {fileID: 1570154548516415338, guid: d8efcffcedf8a82439b517f53368a077, type: 3}
+  _stack: {fileID: 3375502646644160172, guid: 457e02bb9a79a214897a781c32417695, type: 3}
 --- !u!1 &1945407287
 GameObject:
   m_ObjectHideFlags: 0
